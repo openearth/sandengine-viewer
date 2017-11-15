@@ -49,4 +49,9 @@
   a {
   color: #42b983;
   }
+  #map {
+  height: 600px;
+  width: 1000px;
+  text-align: left;
+  }
 </style>
