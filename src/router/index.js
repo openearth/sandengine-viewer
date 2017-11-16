@@ -1,11 +1,15 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
-import HelloMorphology from '@/components/HelloMorphology'
+import Vue from 'vue';
+import Router from 'vue-router';
+// note that @ refers to src
+import HelloWorld from '@/components/HelloWorld';
+import HelloMorphology from '@/components/HelloMorphology';
+import HelloRadar from '@/components/Helloradar';
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
+  // TODO: can we use this to generate a menu
+  // TODO: get rid of the Hello, but stick to a common pattern, for example VMain, VMorpholgy
   routes: [
     {
       path: '/',
@@ -16,6 +20,11 @@ export default new Router({
       path: '/morphology',
       name: 'HelloMorphology',
       component: HelloMorphology
+    },
+    {
+      path: '/radar',
+      name: 'HelloRadar',
+      component: HelloRadar
     }
   ]
-})
+});
