@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <v-card>
+    <v-card id="map">
       <v-card-text>
         <v-mapbox
           access-token="pk.eyJ1Ijoic2lnZ3lmIiwiYSI6Il8xOGdYdlEifQ.3-JZpqwUa3hydjAJFXIlMA"
@@ -48,5 +48,10 @@
   }
   a {
   color: #42b983;
+  }
+  #map {
+  text-align: left;
+  height: 60vh;
+  width:  100%;
   }
 </style>

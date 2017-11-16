@@ -53,9 +53,7 @@
     </v-toolbar>
     <v-content>
       <v-container fluid fill-height>
-        <v-layout justify-center align-center>
-          <router-view/>
-        </v-layout>
+        <router-view/>
       </v-container>
     </v-content>
     <v-btn
