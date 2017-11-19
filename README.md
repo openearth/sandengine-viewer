@@ -1,6 +1,6 @@
 # sandmotor-viewer
 
-> Viewer of data collected in sandmotor project. 
+> Viewer of data collected in sandmotor project.
 
 ## Build Setup
 
@@ -10,6 +10,9 @@ npm install
 
 # serve with hot reload at localhost:8080
 npm run dev
+
+# deploy to github pages
+npm run deploy
 
 # build for production with minification
 npm run build
