@@ -9,7 +9,7 @@
         <canvas class="on" :width="width" :height="height"></canvas>
         <!-- create off canvas to render to -->
         <canvas class="off" :width="width" :height="height"></canvas>
-        <video src="/static/movies/radar_2016.mp4" autoplay loop></video>
+        <video src="static/movies/radar_2016.mp4" autoplay loop></video>
         <div class="placeholder">
         </div>
 
