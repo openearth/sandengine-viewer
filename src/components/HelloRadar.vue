@@ -3,7 +3,9 @@
     <h1>Radar data</h1>
     <v-card >
       <v-card-text>
-        <svg></svg>
+        <svg>
+
+        </svg>
         <canvas class="on" :width="width" :height="height"></canvas>
         <!-- create off canvas to render to -->
         <canvas class="off" :width="width" :height="height"></canvas>
@@ -40,7 +42,6 @@
     width: 500px;
     height: 500px;
     z-index: 100;
-    mix-blend-mode: color-dodge;
   }
   .radar video {
     display: none;
@@ -63,10 +64,18 @@
   svg >>> .bleeps {
     opacity: 0.5;
   }
-
+  svg >>> .bleep {
+    mix-blend-mode: color-dodge;
+  }
+  svg >>> .bar {
+    fill: none;
+    stroke: #33eeff;
+    stroke-width: 3;
+    filter: blur(1px);
+  }
   /* rotate all bleeps separate */
   svg >>> .bleep {
-    fill: green;
+    fill: #33eeff;
   }
   /* rotate the whole image */
   svg {

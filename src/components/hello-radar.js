@@ -7,7 +7,7 @@ export default {
       video: null,
       ctxOff: null,
       ctxOn: null,
-      playbackRate: 0.2,
+      playbackRate: 1.0,
       width: 500,
       height: 500,
       waves: []
@@ -29,6 +29,7 @@ export default {
       // An arc function with all values bound except the endAngle. So, to compute an
       // SVG path string for a given angle, we pass an object with an endAngle
       // property to the `arc` function, and it will return the corresponding string.
+
       var arc = d3
           .arc()
           .innerRadius(0)
@@ -55,6 +56,37 @@ export default {
           .style('opacity', (x) => { return x.opacity; })
           .classed('bleep', true)
           .attr("d", arc);
+
+      var line = d3.line()
+          .x((d) => {return d.x;})
+          .y((d) => {return d.y;});
+
+      var path = g
+          .append('path')
+          .classed('bar', true)
+          .datum([
+            {
+              x: 0,
+              y: 0
+            },
+            {
+              x: 0,
+              y: -this.height/2
+            }
+          ])
+          .attr('d', line);
+
+      var circles = g
+          .selectAll("circle")
+          .data([
+            {r: 1/3 * 250},
+            {r: 2/3 * 250},
+            {r: 0.95 * 3/3 * 250}
+          ])
+          .enter()
+          .append('circle')
+          .classed('bar', true)
+          .attr('r', (d) => {return d.r; });
 
     },
     subscribeVideo() {
@@ -98,7 +130,7 @@ export default {
           frame.data[i * 4 + 3] = 0;
         }
         // v as function of magnitude
-        let val = Math.floor(mag * 255);
+        let val = Math.floor(mag * 200);
         frame.data[i * 4 + 0] = val;
         frame.data[i * 4 + 1] = val;
         frame.data[i * 4 + 2] = val;
@@ -143,6 +175,7 @@ export default {
       _.each(this.waves, (wave) => {
         let col = Math.floor(wave[0]);
         let row = Math.floor(wave[1]);
+        let angle = wave[2];
         let idx = row * this.width + col;
         let r = frame.data[idx * 4 + 0];
         let g = frame.data[idx * 4 + 1];
@@ -152,14 +185,17 @@ export default {
         }
         let u = (r - 127)/127 * 2.0;
         let v = (g - 127)/127 * 2.0;
-        let angle = Math.atan2(v, u);
+        let newAngle = Math.atan2(v, u);
         // rotate angle
-        angle = angle + 0.125 * τ;
-        u = Math.cos(angle);
-        v = Math.sin(angle);
+        u = Math.cos(newAngle);
+        v = Math.sin(newAngle);
         wave[0] = wave[0] + u * scale;
         wave[1] = wave[1] + v * scale;
-        wave[2] = angle;
+        // compute new angle as function of old angle and new angle
+        wave[2] = Math.atan2(
+          Math.sin(angle) + v * 0.1,
+          Math.cos(angle) + u * 0.1
+        );
 
       });
     },
