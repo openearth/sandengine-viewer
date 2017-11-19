@@ -2,6 +2,8 @@
 
 > Viewer of data collected in sandmotor project.
 
+Please visit the [website](http://www.openearth.nl/sandbox-viewer/).
+
 ## Build Setup
 
 ``` bash
