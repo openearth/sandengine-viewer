@@ -41,7 +41,7 @@
     left: 16px;
     width: 500px;
     height: 500px;
-    z-index: 100;
+    z-index: 2;
   }
   .radar video {
     display: none;
@@ -78,7 +78,7 @@
     fill: #33eeff;
   }
   /* rotate the whole image */
-  svg {
+  svg >>> .bleeps {
     animation: rotating 12s linear infinite;
   }
 

@@ -20,11 +20,44 @@ export default {
       svg.attr('width', this.width);
       svg.attr('height', this.height);
 
+      let defs = svg
+          .append('defs');
+      let mask = defs
+          .append('mask')
+          .attr('id', 'frame');
+      // add masking rectangle
+      mask
+        .append('rect')
+        .attr('x', 0)
+        .attr('y', 0)
+        .attr('width', this.width)
+        .attr('height', this.height)
+        .style('fill', 'white');
+      // unmask inner circle
+      mask
+        .append('circle')
+        .style('fill', 'black')
+        .attr('cx', this.width/2)
+        .attr('cy', this.height/2)
+        .attr('r', this.width/2);
+
+      let rect = svg
+          .append('rect')
+          .attr('mask', 'url(#frame)')
+          .attr('x', 0)
+          .attr('y', 0)
+          .attr('width', this.width)
+          .attr('height', this.height);
+
       // Make sure the center is in the middle so we can use css animation
       let g = svg
           .append('g')
-          .classed('bleeps', true)
+          .classed('transformed', true)
           .attr("transform", "translate(" + this.width / 2 + "," + this.height / 2 + ")");
+
+      let bleeps = g
+          .append('g')
+          .classed('bleeps', true);
 
       // An arc function with all values bound except the endAngle. So, to compute an
       // SVG path string for a given angle, we pass an object with an endAngle
@@ -48,7 +81,7 @@ export default {
       );
 
       // list of all arcs, with varying opacity
-      var arcs = g
+      var arcs = bleeps
           .selectAll('path')
           .data(angles)
           .enter()
@@ -61,7 +94,7 @@ export default {
           .x((d) => {return d.x;})
           .y((d) => {return d.y;});
 
-      var path = g
+      var path = bleeps
           .append('path')
           .classed('bar', true)
           .datum([
