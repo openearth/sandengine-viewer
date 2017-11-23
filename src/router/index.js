@@ -4,7 +4,7 @@ import Router from 'vue-router';
 import HelloWorld from '@/components/HelloWorld';
 import HelloMorphology from '@/components/HelloMorphology';
 import HelloRadar from '@/components/Helloradar';
-
+import VMeteo from '@/components/VMeteo'
 Vue.use(Router);
 
 export default new Router({
@@ -25,6 +25,11 @@ export default new Router({
       path: '/radar',
       name: 'HelloRadar',
       component: HelloRadar
+    },
+    {
+      path: '/meteo',
+      name: 'VMeteo',
+      component: VMeteo
     }
   ]
 });

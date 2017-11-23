@@ -19,7 +19,7 @@
         </v-list-tile>
         <v-list-tile href="#/morphology">
           <v-list-tile-action>
-            <v-icon>home</v-icon>
+            <v-icon>terrain</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>morphology</v-list-tile-title>
@@ -27,10 +27,18 @@
         </v-list-tile>
         <v-list-tile href="#/radar">
           <v-list-tile-action>
-            <v-icon>home</v-icon>
+            <v-icon>gps_fixed</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>radar</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile href="#/meteo">
+          <v-list-tile-action>
+            <v-icon>filter_drama</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>meteo</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
