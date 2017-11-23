@@ -1,10 +1,8 @@
 <template>
   <div class="meteo">
-    <h1>{{ msg }}</h1>
+    <h1 id="message">{{ msg }}</h1>
     <v-card>
       <v-card-text>
-         <canvas id="windsock-canvas" width="200" height="200"></canvas>
-
         <v-mapbox
           access-token="pk.eyJ1Ijoic2lnZ3lmIiwiYSI6Il8xOGdYdlEifQ.3-JZpqwUa3hydjAJFXIlMA"
           map-style="mapbox://styles/mapbox/satellite-streets-v10"
@@ -16,6 +14,7 @@
           id="map"
           ref="map"
           >
+          <canvas id="windsock-canvas" width="200" height="200"></canvas>
         </v-mapbox>
       </v-card-text>
     </v-card>
