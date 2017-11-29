@@ -7,7 +7,7 @@ export default {
       video: null,
       ctxOff: null,
       ctxOn: null,
-      playbackRate: 1.0,
+      playbackRate: 0.1,
       width: 500,
       height: 500,
       waves: []
@@ -234,18 +234,17 @@ export default {
     },
     displayWaves() {
       const τ = 2 * Math.PI;
+      const r = 4;
       _.each(this.waves, (wave) => {
         // rotate by a quarter degree
         let angle = 0.25 * τ + wave[2];
         let dx = Math.cos(angle) * 10;
         let dy = Math.sin(angle) * 10;
-
+        this.ctxOn.fillStyle = '#EEEEEE88';
         this.ctxOn.beginPath();
-        this.ctxOn.strokeStyle = '#EEEEEE88';
-        this.ctxOn.lineWidth = 2.0;
-        this.ctxOn.moveTo(wave[0] - dx, wave[1] - dy);
-        this.ctxOn.lineTo(wave[0] + dx, wave[1] + dy);
-        this.ctxOn.stroke();
+        this.ctxOn.arc(wave[0], wave[1], r, 0, τ);
+
+        this.ctxOn.fill();
       });
 
     },
