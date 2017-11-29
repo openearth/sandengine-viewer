@@ -55,5 +55,6 @@
   top: 0;
   left: 0;
   z-index:5;
+  display: none;
   }
 </style>
