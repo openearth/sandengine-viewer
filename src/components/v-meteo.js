@@ -1,6 +1,9 @@
 import $ from 'jquery';
 import mapboxgl from 'mapbox-gl';
 // import * as Bokeh from 'bokehjs'
+// require.import('bokehjs') as Bokeh
+
+// require('bokehjs')
 
 export default {
   name: 'VMeteo',
