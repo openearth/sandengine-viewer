@@ -4,7 +4,7 @@ export default {
   name: 'VMeteo',
     data () {
       return {
-      msg: 'Welcome to your morphologist...'
+      msg: 'Aeolian transport is fun...'
     }
   },
   mounted() {

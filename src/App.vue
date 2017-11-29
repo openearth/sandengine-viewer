@@ -41,6 +41,14 @@
             <v-list-tile-title>meteo</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+        <v-list-tile href="#/aeolian">
+          <v-list-tile-action>
+            <v-icon>grain</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>aeolian</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
       </v-list>
     </v-navigation-drawer>
     <v-toolbar
