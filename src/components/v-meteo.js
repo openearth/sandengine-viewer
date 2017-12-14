@@ -10,15 +10,7 @@ export default {
   jsondata: "None",
     data () {
       return {
-<<<<<<< HEAD
-<<<<<<< HEAD
       msg: 'Aeolian transport is fun...'
-=======
-      msg: "None"
->>>>>>> 56c50d918b2df6a6f0e560e378eb1dcbd99c9839
-=======
-      msg: "None"
->>>>>>> 4b7e632a5f0afa7eb841d1ce759c619871613992
     }
   },
   mounted() {
