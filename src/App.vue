@@ -33,6 +33,14 @@
             <v-list-tile-title>radar</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+        <v-list-tile href="#/adcp">
+          <v-list-tile-action>
+            <v-icon>fa-long-arrow-right</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>adcp</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
         <v-list-tile href="#/meteo">
           <v-list-tile-action>
             <v-icon>filter_drama</v-icon>
@@ -101,6 +109,7 @@
 
 <!-- TODO: cleanup indentation, make sure you use a .vue compatible editor (multi-mode) or split into separate file -->
 <script>
+  import 'font-awesome/css/font-awesome.css';
   export default {
     name: 'app',
     data: function() {
