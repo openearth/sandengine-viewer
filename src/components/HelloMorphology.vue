@@ -1,6 +1,6 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
+  <v-layout fluid>
+    <v-flex sm12>
     <v-card id="map">
       <v-card-text>
         <v-mapbox
@@ -13,48 +13,47 @@
           :min-zoom="5"
           id="map"
           ref="map"
-          >
+        >
         </v-mapbox>
       </v-card-text>
     </v-card>
+    </v-flex>
+  </v-layout>
 
-
-  </div>
 </template>
 
 <script>
   export default {
-  name: 'HelloMorphology',
-  data () {
-  return {
-  msg: 'Welcome to your morphologist...'
-  }
-  }
+    name: 'HelloMorphology',
+    data () {
+      return {
+      }
+    }
   }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .hello {
-   width: 100%;
+    width: 100%;
   }
   h1, h2 {
-  font-weight: normal;
+    font-weight: normal;
   }
   ul {
-  list-style-type: none;
-  padding: 0;
+    list-style-type: none;
+    padding: 0;
   }
   li {
-  display: inline-block;
-  margin: 0 10px;
+    display: inline-block;
+    margin: 0 10px;
   }
   a {
-  color: #42b983;
+    color: #42b983;
   }
   #map {
-  text-align: left;
-  height: 60vh;
-  width:  100%;
+    text-align: left;
+    height: 60vh;
+    width:  100%;
   }
 </style>

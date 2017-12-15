@@ -8,15 +8,16 @@
           rel="stylesheet">
 
     <!-- these should be in the package.json but bokeh package.json does not work... -->
-    <script src="http://cdn.pydata.org/bokeh/release/bokeh-0.12.9.min.js"></script>
-    <script src="http://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.9.min.js"></script>
-    <scripts src="http://cdn.pydata.org/bokeh/release/bokeh-tables-0.12.9.min.js"></scripts>
-    <script src="http://cdn.pydata.org/bokeh/release/bokeh-api-0.12.9.min.js"></script>
+    <!-- Use Bokeh 0.12.4, because the ColumnDataSource with an array of dates doesn't worke
+         with Bokeh 0.12.9 or 0.12.13 -->
+    <link href="http://cdn.pydata.org/bokeh/release/bokeh-0.12.4.css" rel="stylesheet"/>
+    <link href="http://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.4.css" rel="stylesheet"/>
+    <link href="http://cdn.pydata.org/bokeh/release/bokeh-tables-0.12.4.css" rel="stylesheet"/>
 
-
-    <link href="http://cdn.pydata.org/bokeh/release/bokeh-0.12.9.min.css" rel="stylesheet"/>
-    <link href="http://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.9.min.css" rel="stylesheet"/>
-    <link href="http://cdn.pydata.org/bokeh/release/bokeh-tables-0.12.9.min.css" rel="stylesheet"/>
+    <script src="http://cdn.pydata.org/bokeh/release/bokeh-0.12.4.js"></script>
+    <script src="http://cdn.pydata.org/bokeh/release/bokeh-widgets-0.12.4.js"></script>
+    <script src="http://cdn.pydata.org/bokeh/release/bokeh-tables-0.12.4.js"></script>
+    <script src="http://cdn.pydata.org/bokeh/release/bokeh-api-0.12.4.js"></script>
 
 
     <title>sandmotor-viewer</title>

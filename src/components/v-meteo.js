@@ -8,38 +8,47 @@ import mapboxgl from 'mapbox-gl';
 export default {
   name: 'VMeteo',
   jsondata: "None",
+  // meteodata: "None",
   data () {
     return {
       msg: ""
     };
   },
   mounted() {
-    this.jsondata = $.getJSON({
-      'url':'/static/wind_data.json',
-      'async': false
-    }).responseJSON;
-
-    this.$refs.map.map.on("load", () => {
+    fetch('/static/wind_data.json')
+    .then((resp) =>{
+      return resp.json();
+    })
+    .then((json) => {
+      this.jsondata = json
       this.addCanvas(this.$refs.map.map)
       this.windsock()
+    })
 
-    });
-
-    var popup = new mapboxgl.Popup({})
-
-    this.$refs.map.map.on(
-      "click",
-      (e) => {
-        var del = 0.002;
-        if (
-          (e.lngLat.lng > this.jsondata.lon - del) ||
-            (e.lngLat.lng < this.jsondata.lon + del) ||
-            (e.lngLat.lat > this.jsondata.lat - del) ||
-            (e.lngLat.lng < this.jsondata.lat + del)
-        ) {
-          popup.remove();
-        }
-      });
+    fetch( "/static/meteo_data.json")
+      .then((resp) => {
+        return resp.json();
+      })
+      .then((json) => {
+        this.bokehplot(
+          "Barometer_Avg",
+          document.getElementById("Barometer_Avg"),
+          json
+        );
+        this.bokehplot(
+          "WindSpeed_Avg",
+          document.getElementById("WindSpeed_Avg"),
+          json
+        );
+        this.bokehplot(
+          "RelHumidity_Avg",
+          document.getElementById("RelHumidity_Avg"),
+          json
+        );
+      })
+      .catch((reason) => {
+        console.warn(reason)
+      })
   },
   methods: {
     addCanvas(map){
@@ -133,6 +142,45 @@ export default {
 
       draw();
 
-    }
+    },
+    bokehplot(data, div, meteodata){
+      var plt = Bokeh.Plotting;
+      var tools = "pan,crosshair,wheel_zoom,box_zoom,reset,save";
+      var begin = 500000
+      var end = 750000
+      var y = meteodata[data].data.slice(begin, end)
+      y = _.map(y, function(i){
+        if(i >= 9.969209968386869e+36){
+          return NaN
+        }
+        else {
+          return i
+        }
+      })
+      var x = []
+      _.each(meteodata.time.slice(begin, end), function(event){
+        x.push(new Date(event))
+      });
+      var source = new Bokeh.ColumnDataSource({ data: { x: x, y: y } });
+      var plot = new plt.figure({
+         title: meteodata[data].title,
+         tools: tools,
+         width: 400,
+         height: 200,
+         x_axis_type: 'datetime',
+         background_fill_color: "#F2F2F7"
+      });
+      var line = new Bokeh.Line({
+         x: { field: "x" },
+         y: { field: "y" },
+         line_color: "#666699",
+         line_width: 2
+      });
+
+      plot.add_glyph(line, source);
+      var doc = new Bokeh.Document();
+      doc.add_root(plot);
+      Bokeh.embed.add_document_standalone(doc, div);
+     }
   }
 }

@@ -18,6 +18,23 @@
         </v-mapbox>
       </v-card-text>
     </v-card>
+    <v-container>
+      <v-layout row wrap>
+        <v-card  id="Barometer_Avg">
+          <v-card-text>
+          </v-card-text>
+        </v-card>
+        <v-card id="WindSpeed_Avg">
+          <v-card-text>
+          </v-card-text>
+        </v-card>
+        <v-card id="RelHumidity_Avg">
+          <v-card-text>
+          </v-card-text>
+        </v-card>
+      </v-layout>
+    </v-container>
+
 
 
   </div>
@@ -28,6 +45,9 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .container{
+    width: 100vw;
+  }
   .hello {
    width: 100%;
   }
@@ -47,7 +67,7 @@
   }
   #map {
   text-align: left;
-  height: 80vh;
+  height: 30vh;
   width:  100vw;
   }
   #windsock-canvas {
