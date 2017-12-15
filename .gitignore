@@ -15,3 +15,12 @@ selenium-debug.log
 *.ntvs*
 *.njsproj
 *.sln
+package-lock.json
+package.json
+package-lock.json
+notebooks/.ipynb_checkpoints/meteo-checkpoint.ipynb
+notebooks/.ipynb_checkpoints/Aeolian-checkpoint.ipynb
+package-lock.json
+package.json
+package.json
+package.json
