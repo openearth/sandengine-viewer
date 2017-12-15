@@ -15,7 +15,7 @@ export default {
     };
   },
   mounted() {
-    fetch('/static/wind_data.json')
+    fetch('static/wind_data.json')
     .then((resp) =>{
       return resp.json();
     })
@@ -23,9 +23,9 @@ export default {
       this.jsondata = json
       this.addCanvas(this.$refs.map.map)
       this.windsock()
-    })
+    });
 
-    fetch( "/static/meteo_data.json")
+    fetch( "https://s3-eu-west-1.amazonaws.com/deltares-opendata/zandmotor/meteo/meteo_data.json")
       .then((resp) => {
         return resp.json();
       })

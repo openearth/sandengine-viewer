@@ -22,15 +22,7 @@
 
 </template>
 
-<script>
-  export default {
-    name: 'HelloMorphology',
-    data () {
-      return {
-      }
-    }
-  }
-</script>
+<script src="./hello-morphology.js"></script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
