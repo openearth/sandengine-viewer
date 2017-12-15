@@ -4,8 +4,10 @@ import Router from 'vue-router';
 import HelloWorld from '@/components/HelloWorld';
 import HelloMorphology from '@/components/HelloMorphology';
 import HelloRadar from '@/components/Helloradar';
-import VMeteo from '@/components/VMeteo'
-import VAeolian from '@/components/VAeolian'
+import VMeteo from '@/components/VMeteo';
+import VAeolian from '@/components/VAeolian';
+import ImageTimeseries from '@/components/ImageTimeseries';
+
 Vue.use(Router);
 
 export default new Router({
@@ -26,6 +28,18 @@ export default new Router({
       path: '/radar',
       name: 'HelloRadar',
       component: HelloRadar
+    },
+    {
+      path: '/adcp',
+      name: 'ImageTimseries',
+      component: ImageTimeseries,
+      props: {
+        images: [
+          'https://s3-eu-west-1.amazonaws.com/deltares-opendata/zandmotor/adcp/mag.png',
+          'https://s3-eu-west-1.amazonaws.com/deltares-opendata/zandmotor/adcp/mag_anomaly.png',
+          'https://s3-eu-west-1.amazonaws.com/deltares-opendata/zandmotor/adcp/uv.png'
+        ]
+      }
     },
     {
       path: '/meteo',
