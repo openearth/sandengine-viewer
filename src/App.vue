@@ -60,26 +60,21 @@
       </v-list>
     </v-navigation-drawer>
     <v-toolbar
-      color="blue darken-3"
-      dark
+      light
       app
       clipped-left
       fixed
     >
       <v-toolbar-title class="ml-0 pl-3">
         <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+        Zandmotor data
       </v-toolbar-title>
-      <v-text-field
-        solo
-        prepend-icon="search"
-        placeholder="Search"
-      ></v-text-field>
       <v-spacer></v-spacer>
       <v-btn icon large>
         <v-avatar size="32px" tile>
           <!-- todo replace by company logo -->
           <img
-            src="https://vuetifyjs.com/static/doc-images/logo.svg"
+            src="http://www.dezandmotor.nl/assets/images/logo-de-zandmotor.png"
             alt="Logo"
           >
         </v-avatar>
