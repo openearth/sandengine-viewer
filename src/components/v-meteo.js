@@ -8,10 +8,10 @@ import mapboxgl from 'mapbox-gl';
 export default {
   name: 'VMeteo',
   jsondata: "None",
-    data () {
-      return {
+  data () {
+    return {
       msg: "None"
-    }
+    };
   },
   mounted() {
     this.jsondata = $.getJSON({
@@ -32,14 +32,14 @@ export default {
         console.log('click')
         var del = 0.002
         if ((e.lngLat.lng > this.jsondata.lon - del) ||
-          (e.lngLat.lng < this.jsondata.lon + del) ||
-          (e.lngLat.lat > this.jsondata.lat - del) ||
-          (e.lngLat.lng < this.jsondata.lat + del)){
-            popup.remove()
-            // this.bokehplot(e, popup)
+            (e.lngLat.lng < this.jsondata.lon + del) ||
+            (e.lngLat.lat > this.jsondata.lat - del) ||
+            (e.lngLat.lng < this.jsondata.lat + del)){
+          popup.remove()
+          // this.bokehplot(e, popup)
         }
 
-    })
+      })
   },
   methods: {
     // bokehplot(e, popup){
@@ -91,15 +91,15 @@ export default {
         id: 'canvas-layer',
         type: 'raster',
         source:  {
-           type: 'canvas',
-           animate: true,
-           canvas: 'windsock-canvas',
-           coordinates: [
-             [lon - del, lat + del],
-             [lon + del, lat + del],
-             [lon + del, lat - del],
-             [lon - del, lat - del]
-           ]
+          type: 'canvas',
+          animate: true,
+          canvas: 'windsock-canvas',
+          coordinates: [
+            [lon - del, lat + del],
+            [lon + del, lat + del],
+            [lon + del, lat - del],
+            [lon - del, lat - del]
+          ]
         },
         paint: {}
       });
@@ -119,6 +119,12 @@ export default {
         var c = 100
 
         ctx.clearRect(0, 0, w, h);
+
+        // shadow blur
+        ctx.shadowColor = '#333';
+        ctx.shadowBlur = 10;
+        ctx.shadowOffsetX = 5;
+        ctx.shadowOffsetY = 5;
         ctx.beginPath();
         ctx.arc(c, c, 10, 0, Math.PI * 2)
         ctx.fillStyle = "black";
@@ -130,23 +136,28 @@ export default {
         ctx.moveTo(bw, bh+10);
         ctx.lineTo(c, c);
         ctx.lineTo(bw+40, bh+10);
-        ctx.stroke()
+        ctx.stroke();
         ctx.closePath();
-        ctx.beginPath();
 
-        if (aspeed >0) { ctx.rect(80, bh, 40, 10)}
-        if (aspeed >4) { ctx.rect(80, bh-20, 40, 10)}
-        if (aspeed >8) { ctx.rect(80, bh-40, 40, 10)}
-
-        ctx.fillStyle = "red"
-        ctx.fill()
-
-        ctx.closePath();
-        ctx.beginPath();
-        if (aspeed >2) { ctx.rect(80, bh-10, 40, 10)}
-        if (aspeed >6) { ctx.rect(80, bh-30, 40, 10)}
-        ctx.fillStyle = "white"
-        ctx.fill()
+        let bands = [
+          [0, 80, bh, 40, 10, 'red'],
+          [2, 80, bh-10, 40, 10, 'white'],
+          [4, 80, bh-20, 40, 10, 'red'],
+          [6, 80, bh-30, 40, 10, 'white'],
+          [8, 80, bh-40, 40, 10, 'red']
+        ];
+        let selectedBands = _.filter(bands, (band) => {
+          let speed = band[0];
+          return aspeed > speed;
+        });
+        console.log('bands', bands);
+        _.each(selectedBands, (band) => {
+          ctx.beginPath();
+          ctx.fillStyle = band[5];
+          ctx.rect(band[1], band[2], band[3], band[4]);
+          ctx.fill();
+          ctx.closePath();
+        });
 
         ctx.translate(w/2, h/2)
         ctx.rotate(-(180 - direc[t-1])*(2 * Math.PI / 360))
