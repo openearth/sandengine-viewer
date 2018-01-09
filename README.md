@@ -2,7 +2,7 @@
 
 > Viewer of data collected in sandmotor project.
 
-Please visit the [website](http://www.openearth.nl/sandbox-viewer/).
+Please visit the [website](http://www.openearth.nl/sandmotor-viewer/#/).
 
 ## Build Setup
 
