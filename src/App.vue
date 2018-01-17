@@ -99,7 +99,6 @@
 
   </v-app>
 
-</div>
 </template>
 
 <!-- TODO: cleanup indentation, make sure you use a .vue compatible editor (multi-mode) or split into separate file -->
