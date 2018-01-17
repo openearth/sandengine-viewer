@@ -18,8 +18,7 @@ selenium-debug.log
 package-lock.json
 package.json
 package-lock.json
-notebooks/.ipynb_checkpoints/meteo-checkpoint.ipynb
-notebooks/.ipynb_checkpoints/Aeolian-checkpoint.ipynb
+notebooks/.ipynb_checkpoints
 package-lock.json
 package.json
 package.json
