@@ -82,7 +82,29 @@
     </v-toolbar>
     <v-content>
       <v-container fluid fill-height>
-        <router-view/>
+        <v-layout fluid wrap>
+          <v-flex sm12 mb-2>
+            <v-card id="map">
+              <v-card-text>
+                <v-mapbox
+                  access-token="pk.eyJ1Ijoic2lnZ3lmIiwiYSI6Il8xOGdYdlEifQ.3-JZpqwUa3hydjAJFXIlMA"
+                  map-style="mapbox://styles/mapbox/satellite-streets-v10"
+                  :center="[4, 52]"
+                  :zoom="10"
+                  :pitch="60"
+                  :bearing="-0"
+                  :min-zoom="5"
+                  id="map"
+                  ref="map"
+                >
+                </v-mapbox>
+              </v-card-text>
+            </v-card>
+          </v-flex>
+          <v-flex>
+            <router-view/>
+          </v-flex>
+        </v-layout>
       </v-container>
     </v-content>
     <!-- todo add legend functionality or remove here.. -->
@@ -115,6 +137,11 @@
 </script>
 
 <style>
+  #map {
+    text-align: left;
+    height: 60vh;
+    width:  100%;
+  }
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     text-align: center;
