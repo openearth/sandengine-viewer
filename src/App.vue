@@ -91,7 +91,7 @@
             </v-card-text>
           </v-card>
         </v-flex>
-        <v-flex v-for="plot in plots">
+        <v-flex v-for="plot in plots" :key="plot">
           <v-list-tile-action>
             <v-card :id="'card_'+ plot">
               <v-card-actions>
