@@ -70,7 +70,7 @@ export default {
       var timeEnd = Date(parseFloat(e.features[0].properties.timeEnd));
       var timeStart = Date(parseFloat(e.features[0].properties.timeStart));
 
-      fetch("static/aeolian_data_" + deploymentName + ".json")
+      fetch("https://s3-eu-west-1.amazonaws.com/deltares-opendata/zandmotor/aeolian/aeolian_data_" + deploymentName + ".json")
         .then((resp) => {
           return resp.json();
         })
