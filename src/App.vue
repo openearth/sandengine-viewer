@@ -92,7 +92,7 @@
           </v-card>
         </v-flex>
 
-        <v-card :id="'card_'+ plot" v-for="plot in plots" :key="plot" >
+        <v-card :id="'card_'+ plot" v-for="plot in plots" :key="plot" class="mb-1 mr-1">
           <v-card-actions>
             <v-btn flat icon v-on:click.native="removePlot(plot, $event)">
               <v-icon>close</v-icon>
