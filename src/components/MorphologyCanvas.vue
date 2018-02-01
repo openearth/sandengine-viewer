@@ -1,7 +1,7 @@
 <template>
   <div class="morphology">
-    <div>
-      <video :width="500" :height="1250" src="obj.mp4"></video>
+    <div v-for="obj in meta">
+      <video :width="500" :height="1250" :src="baseUrl + '/' + obj.mp4" autoplay loop></video>
       <canvas :width="500" :height="1250"></canvas>
       <canvas :width="500" :height="625"></canvas>
     </div>
