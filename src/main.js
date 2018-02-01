@@ -3,7 +3,7 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify';
 
-import App from './App';
+import App from './App.vue';
 import router from './router';
 import Vue2MapboxGL from 'vue2mapbox-gl';
 
