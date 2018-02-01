@@ -7,7 +7,7 @@
     </div>
   </div>
 </template>
-<script src="./morphology-component.js"></script>
+<script src="./morphology-canvas.js"></script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 </style>

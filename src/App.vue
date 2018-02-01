@@ -91,20 +91,23 @@
             </v-card-text>
           </v-card>
         </v-flex>
-        <v-flex v-for="plot in plots" :key="plot">
-          <v-list-tile-action>
-            <v-card :id="'card_'+ plot">
-              <v-card-actions>
-                <v-btn flat icon v-on:click.native="removePlot(plot, $event)">
-                  <v-icon>close</v-icon>
-                </v-btn>
-              </v-card-actions>
-              <v-card-text :id="'plot_'+ plot">
-              </v-card-text>
-            </v-card>
-          </v-list-tile-action>
-        </v-flex>
+
+        <v-card :id="'card_'+ plot" v-for="plot in plots" :key="plot" >
+          <v-card-actions>
+            <v-btn flat icon v-on:click.native="removePlot(plot, $event)">
+              <v-icon>close</v-icon>
+            </v-btn>
+          </v-card-actions>
+          <v-card-text >
+            <div class="plot-container bk-root" :id="'plot_'+ plot"></div>
+          </v-card-text>
+        </v-card>
+
       </v-layout>
+      <!-- hidden containers -->
+      <div class="hidden">
+        <morphology-canvas></morphology-canvas>
+      </div>
     </v-container>
   </v-content>
 </v-app>
@@ -120,6 +123,9 @@
   width: 100%;
 }
 
+  .hidden {
+    display: none;
+  }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   text-align: center;

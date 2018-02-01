@@ -82,7 +82,6 @@ function bokehplot(locationID, deploymentName, timeseries, timeEnd, timeStart, p
   }
 
   var div = document.getElementById(div_id);
-  console.log("div aeolian", div)
   div.innerHTML = ""; // clear div
 
   // General Bokeh settings
