@@ -35,7 +35,7 @@ export default {
         cursor : 'pointer',
         source: {
           type: 'geojson',
-          data: '/static/AeolianLocation.geojson'
+          data: '/static/aeolian_data.geojson'
         },
         paint: {
             // make circles larger as the user zooms from z12 to z22
