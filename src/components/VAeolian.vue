@@ -17,6 +17,14 @@
         </v-mapbox>
       </v-card-text>
     </v-card>
+    <v-container>
+      <v-layout row wrap>
+        <v-card  id="Particle_count_plot">
+          <v-card-text>
+          </v-card-text>
+        </v-card>
+      </v-layout>
+    </v-container>
   </div>
 </template>
 
@@ -43,7 +51,7 @@
   }
   #map {
   text-align: left;
-  height: 80vh;
-  width:  80vw;
+  height: 50vh;
+  width: 100vw;
   }
 </style>
