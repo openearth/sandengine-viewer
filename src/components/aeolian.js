@@ -1,6 +1,7 @@
 import {
   bus
 } from '@/event-bus.js';
+import moment from 'moment';
 import $ from 'jquery';
 
 function AddAeolian(map, layers) {
@@ -53,8 +54,8 @@ function ShowAeolianData(point, div_id) {
   // todo check if multiple are selected; for now just select first
   var deploymentName = point.properties.deploymentName;
   var locationID = point.properties.location_ID;
-  var timeEnd = Date(parseFloat(point.properties.timeEnd));
-  var timeStart = Date(parseFloat(point.properties.timeStart));
+  var timeEnd = moment.unix(parseFloat(point.properties.timeEnd));
+  var timeStart = moment.unix(parseFloat(point.properties.timeStart));
 
   fetch("https://s3-eu-west-1.amazonaws.com/deltares-opendata/zandmotor/aeolian/aeolian_data_" + deploymentName + ".json")
     .then((resp) => {
@@ -64,8 +65,8 @@ function ShowAeolianData(point, div_id) {
       locationID = locationID;
       deploymentName = deploymentName;
       timeseries = timeseries;
-      timeEnd = timeEnd
-      timeStart = timeStart
+      timeEnd = timeEnd.format('L')
+      timeStart = timeStart.format('L')
       bokehplot(locationID, deploymentName, timeseries, timeEnd, timeStart, point, div_id);
     })
     .catch((reason) => {
@@ -149,7 +150,6 @@ function bokehplot(locationID, deploymentName, timeseries, timeEnd, timeStart, p
     plot.add_glyph(line, source);
   }
 
-  console.log("Compiling Bokeh plot")
   var doc = new Bokeh.Document();
   doc.add_root(plot);
   Bokeh.embed.add_document_standalone(doc, div);

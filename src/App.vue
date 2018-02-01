@@ -87,6 +87,7 @@
             <v-card-text>
               <v-mapbox access-token="pk.eyJ1Ijoic2lnZ3lmIiwiYSI6Il8xOGdYdlEifQ.3-JZpqwUa3hydjAJFXIlMA" map-style="mapbox://styles/mapbox/satellite-streets-v10" :center="[4.186, 52.050]" :zoom="13.16" :pitch="5.00" :bearing="-0" :min-zoom="5" id="map" ref="map">
                 <canvas id="windsock-canvas" width="200" height="200"></canvas>
+                <morphology-canvas></morphology-canvas>
               </v-mapbox>
             </v-card-text>
           </v-card>
@@ -94,7 +95,7 @@
 
         <v-card :id="'card_'+ plot" v-for="plot in plots" :key="plot" class="mb-1 mr-1">
           <v-card-actions>
-            <v-btn flat icon v-on:click.native="removePlot(plot, $event)">
+            <v-btn flat icon v-on:click="removePlot(plot, $event)">
               <v-icon>close</v-icon>
             </v-btn>
           </v-card-actions>
@@ -104,10 +105,6 @@
         </v-card>
 
       </v-layout>
-      <!-- hidden containers -->
-      <div class="hidden">
-        <morphology-canvas></morphology-canvas>
-      </div>
     </v-container>
   </v-content>
 </v-app>
@@ -117,25 +114,26 @@
   @import '~mapbox-gl/dist/mapbox-gl.css';
 
 
-#map {
-  text-align: left;
-  height: 60vh;
-  width: 100%;
-}
+  #map {
+    text-align: left;
+    height: 60vh;
+    width: 100%;
+  }
 
   .hidden {
+    /* display: none; */
+  }
+
+  #app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    text-align: center;
+  }
+
+  #windsock-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
     display: none;
   }
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  text-align: center;
-}
-
-#windsock-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 5;
-  display: none;
-}
 </style>

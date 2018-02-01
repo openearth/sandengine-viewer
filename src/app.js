@@ -40,6 +40,9 @@ export default {
     bus.$on('select-layers', (layers) => {
       Vue.set(this, 'layers', layers);
     });
+    bus.$on('add-layer', (layer) => {
+      this.layers.push(layer);
+    });
 
     bus.$on('click-plots', (plots) => {
       Vue.set(this, 'plots', plots);
