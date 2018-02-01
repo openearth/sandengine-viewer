@@ -107,14 +107,13 @@
       </v-layout>
     </v-container>
   </v-content>
-  <!-- todo add legend functionality or remove here.. -->
-  <v-btn fab bottom right color="pink" dark fixed>
-    <v-icon>add</v-icon>
-  </v-btn>
 </v-app>
 </template>
 <script src="./app.js"></script>
 <style>
+  @import '~mapbox-gl/dist/mapbox-gl.css';
+
+
 #map {
   text-align: left;
   height: 60vh;
