@@ -87,50 +87,53 @@
             <v-card-text>
               <v-mapbox access-token="pk.eyJ1Ijoic2lnZ3lmIiwiYSI6Il8xOGdYdlEifQ.3-JZpqwUa3hydjAJFXIlMA" map-style="mapbox://styles/mapbox/satellite-streets-v10" :center="[4.186, 52.050]" :zoom="13.16" :pitch="5.00" :bearing="-0" :min-zoom="5" id="map" ref="map">
                 <canvas id="windsock-canvas" width="200" height="200"></canvas>
+                <morphology-canvas></morphology-canvas>
               </v-mapbox>
             </v-card-text>
           </v-card>
         </v-flex>
-        <v-flex v-for="plot in plots" :key="plot">
-          <v-list-tile-action>
-            <v-card :id="'card_'+ plot">
-              <v-card-actions>
-                <v-btn flat icon v-on:click.native="removePlot(plot, $event)">
-                  <v-icon>close</v-icon>
-                </v-btn>
-              </v-card-actions>
-              <v-card-text :id="'plot_'+ plot">
-              </v-card-text>
-            </v-card>
-          </v-list-tile-action>
-        </v-flex>
+
+        <v-card :id="'card_'+ plot" v-for="plot in plots" :key="plot" class="mb-1 mr-1">
+          <v-card-actions>
+            <v-btn flat icon v-on:click="removePlot(plot, $event)">
+              <v-icon>close</v-icon>
+            </v-btn>
+          </v-card-actions>
+          <v-card-text >
+            <div class="plot-container bk-root" :id="'plot_'+ plot"></div>
+          </v-card-text>
+        </v-card>
+
       </v-layout>
     </v-container>
   </v-content>
-  <!-- todo add legend functionality or remove here.. -->
-  <v-btn fab bottom right color="pink" dark fixed>
-    <v-icon>add</v-icon>
-  </v-btn>
 </v-app>
 </template>
 <script src="./app.js"></script>
 <style>
-#map {
-  text-align: left;
-  height: 60vh;
-  width: 100%;
-}
+  @import '~mapbox-gl/dist/mapbox-gl.css';
 
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  text-align: center;
-}
 
-#windsock-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 5;
-  display: none;
-}
+  #map {
+    text-align: left;
+    height: 60vh;
+    width: 100%;
+  }
+
+  .hidden {
+    /* display: none; */
+  }
+
+  #app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    text-align: center;
+  }
+
+  #windsock-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    display: none;
+  }
 </style>

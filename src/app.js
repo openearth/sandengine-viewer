@@ -4,6 +4,7 @@ import {
 } from '@/event-bus.js';
 import 'material-design-icons/iconfont/material-icons.css';
 import LayerControl from './components/LayerControl';
+import MorphologyCanvas from './components/MorphologyCanvas';
 import {
   AddAeolian,
   ShowAeolianData
@@ -38,6 +39,9 @@ export default {
   mounted() {
     bus.$on('select-layers', (layers) => {
       Vue.set(this, 'layers', layers);
+    });
+    bus.$on('add-layer', (layer) => {
+      this.layers.push(layer);
     });
 
     bus.$on('click-plots', (plots) => {
@@ -110,6 +114,7 @@ export default {
     }
   },
   components: {
-    'layer-control': LayerControl
+    'layer-control': LayerControl,
+    'morphology-canvas': MorphologyCanvas
   }
 };
