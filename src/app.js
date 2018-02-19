@@ -5,6 +5,7 @@ import {
 import 'material-design-icons/iconfont/material-icons.css';
 import LayerControl from './components/LayerControl';
 import MorphologyCanvas from './components/MorphologyCanvas';
+import TimeSlider from './components/TimeSlider';
 import {
   AddAeolian,
   ShowAeolianData
@@ -115,6 +116,7 @@ export default {
   },
   components: {
     'layer-control': LayerControl,
-    'morphology-canvas': MorphologyCanvas
+    'morphology-canvas': MorphologyCanvas,
+    'time-slider': TimeSlider
   }
 };
