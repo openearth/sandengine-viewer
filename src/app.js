@@ -29,6 +29,7 @@ export default {
         title: 'Inspire'
       }],
       layers: [],
+      legends: [],
       jsondata: "None",
       msg: "",
       timeStart: null,
@@ -43,7 +44,9 @@ export default {
     bus.$on('add-layer', (layer) => {
       this.layers.push(layer);
     });
-
+    bus.$on('add-legend', (legend) => {
+      this.legends.push(legend);
+      });
     bus.$on('click-plots', (plots) => {
       Vue.set(this, 'plots', plots);
     });

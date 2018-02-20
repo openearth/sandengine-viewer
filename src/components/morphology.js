@@ -17,13 +17,29 @@ function AddMorphology(map, layers) {
       "data": "static/sediment_data.geojson"
     },
     paint: {
-      "circle-color": '#52A8B4',
-      "circle-opacity": 0.5
+      "circle-color": {
+                    "base": 1,
+                    "type": "exponential",
+                    "property": "D50",
+                    "stops": [
+                        [
+                            0,
+                            "hsla(0, 100%, 50%, 0.5)"
+                        ],
+                        [
+                            400,
+                            "rgba(255, 255, 0, 0.5)"
+                        ]
+                    ],
+                    "default": "hsl(0, 0%, 0%)"
+                },
+      "circle-stroke-width": 0.5	
     }
   }
   map.addLayer(layer_json);
   layers.push(layer_json)
-  bus.$emit('select-layers', layers);
+    bus.$emit('select-layers', layers);
+    bus.$emit('add-legend', 'test');
 }
 
 function ShowMorphologyData(data){
