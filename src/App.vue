@@ -11,7 +11,7 @@
         </v-list-tile>
       </v-list>
     </v-toolbar>
-    <layer-control :layers="layers" :legend="legends" :map="map"></layer-control>
+    <layer-control :layers="layers" :map="map"></layer-control>
 
   </v-navigation-drawer>
   <v-toolbar light app clipped-left fixed>
