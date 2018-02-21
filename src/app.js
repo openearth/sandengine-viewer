@@ -30,6 +30,7 @@ export default {
         title: 'Inspire'
       }],
       layers: [],
+      legends: [],
       jsondata: "None",
       msg: "",
       timeExtent: null,
@@ -43,7 +44,6 @@ export default {
     bus.$on('add-layer', (layer) => {
       this.layers.push(layer);
     });
-
     bus.$on('click-plots', (plots) => {
       Vue.set(this, 'plots', plots);
     });
@@ -103,7 +103,6 @@ export default {
             var div_id = "Particle_" + point.properties.location_ID
             this.plots.push(div_id)
             bus.$emit('click-plots', this.plots);
-            console.log("plot_" + div_id)
             ShowAeolianData(point, "plot_" + div_id)
           }
         })

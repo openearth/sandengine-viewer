@@ -11,7 +11,7 @@
         </v-list-tile>
       </v-list>
     </v-toolbar>
-    <layer-control :layers="layers" :map="map"></layer-control>
+    <layer-control :layers="layers" :legend="legends" :map="map"></layer-control>
 
   </v-navigation-drawer>
   <v-toolbar light app clipped-left fixed>
@@ -49,7 +49,7 @@
               <v-icon>close</v-icon>
             </v-btn>
           </v-card-actions>
-          <v-card-text >
+          <v-card-text>
             <div class="plot-container bk-root" :id="'plot_'+ plot"></div>
           </v-card-text>
         </v-card>
@@ -61,29 +61,42 @@
 </template>
 <script src="./app.js"></script>
 <style>
-  @import '~mapbox-gl/dist/mapbox-gl.css';
+@import '~mapbox-gl/dist/mapbox-gl.css';
 
 
-  #map {
-    text-align: left;
-    height: 60vh;
-    width: 100%;
-  }
+#map {
+  text-align: left;
+  height: 60vh;
+  width: 100%;
+}
 
-  .hidden {
-    /* display: none; */
-  }
+.hidden {
+  /* display: none; */
+}
 
-  #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    text-align: center;
-  }
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  text-align: center;
+}
 
-  #windsock-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 5;
-    display: none;
-  }
+#windsock-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  display: none;
+}
+
+.bartext {
+  height: 10px;
+  width: 80%;
+  margin-left: 10%;
+  text-align: justify;
+}
+
+span {
+  width: 100%;
+  height: 1em;
+  display: inline-block;
+}
 </style>
