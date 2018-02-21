@@ -88,8 +88,10 @@ export default {
     step(now) {
       // request the next step (yes you can call this function now, does not matter)
       requestAnimationFrame(this.step)
+      // first update, when this.last is still null, set value and return
       if (!this.last) {
         this.last = now;
+        return
       }
       // now we can just return if we are not playing (will result in a regular poll for playing)
       if (this.state !== 'playing') {
