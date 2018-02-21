@@ -5,6 +5,7 @@ import {
 import 'material-design-icons/iconfont/material-icons.css';
 import LayerControl from './components/LayerControl';
 import MorphologyCanvas from './components/MorphologyCanvas';
+import TimeSlider from './components/TimeSlider';
 import {
   AddAeolian,
   ShowAeolianData
@@ -31,8 +32,7 @@ export default {
       layers: [],
       jsondata: "None",
       msg: "",
-      timeStart: null,
-      timeEnd: null,
+      timeExtent: null,
       plots: []
     };
   },
@@ -51,6 +51,11 @@ export default {
     bus.$on('map-loaded', (event) => {
       Vue.set(this, 'map', event.target);
     });
+
+    this.$refs.timeslider.$on('time-extent-update', (event) => {
+      this.timeExtent = event;
+    })
+
     this.$refs.map.$on('mb-load', (event) => {
       bus.$emit('map-loaded', event);
       AddMeteo(this.$refs.map.map, this.layers)
@@ -115,6 +120,7 @@ export default {
   },
   components: {
     'layer-control': LayerControl,
-    'morphology-canvas': MorphologyCanvas
+    'morphology-canvas': MorphologyCanvas,
+    'time-slider': TimeSlider
   }
 };
