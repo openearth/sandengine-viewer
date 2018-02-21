@@ -16,6 +16,15 @@ function AddMorphology(map, layers) {
       "type": "geojson",
       "data": "static/sediment_data.geojson"
     },
+    "range": "0  400",
+    "css": "height: 10px; \
+      width: 80%; \
+      margin-left: 10%; \
+      text-align: justify; \
+      padding-top: 10px; \
+      background: linear-gradient(to right, \
+      hsla(0, 100%, 50%, 0.5), \
+      rgba(255, 255, 0, 0.5));",
     paint: {
       "circle-color": {
                     "base": 1,
@@ -33,7 +42,7 @@ function AddMorphology(map, layers) {
                     ],
                     "default": "hsl(0, 0%, 0%)"
                 },
-      "circle-stroke-width": 0.5	
+      "circle-stroke-width": 0.5
     }
   }
   map.addLayer(layer_json);
