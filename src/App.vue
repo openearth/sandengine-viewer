@@ -1,7 +1,7 @@
 <template>
 <v-app>
   <!-- TODO: temporary off and fix that the drawer collapses again -->
-  <v-navigation-drawer fixed temporary clipped app v-model="drawer">
+  <v-navigation-drawer fixed clipped app v-model="drawer">
     <v-toolbar flat>
       <v-list>
         <v-list-tile>
@@ -87,7 +87,7 @@
             <v-card-text>
               <v-mapbox access-token="pk.eyJ1Ijoic2lnZ3lmIiwiYSI6Il8xOGdYdlEifQ.3-JZpqwUa3hydjAJFXIlMA" map-style="mapbox://styles/mapbox/satellite-streets-v10" :center="[4.186, 52.050]" :zoom="13.16" :pitch="5.00" :bearing="-0" :min-zoom="5" id="map" ref="map">
                 <canvas id="windsock-canvas" width="200" height="200"></canvas>
-                <morphology-canvas></morphology-canvas>
+                <!-- <morphology-canvas></morphology-canvas> -->
               </v-mapbox>
             </v-card-text>
           </v-card>

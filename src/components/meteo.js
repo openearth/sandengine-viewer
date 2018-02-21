@@ -9,7 +9,6 @@ import {
 } from '@/event-bus.js';
 
 function AddMeteo(map, layers) {
-  console.log("addmeteo", layers)
   fetch('static/wind_data.json')
     .then((resp) => {
       return resp.json();
@@ -74,7 +73,6 @@ function addCanvas(jsondata, layers, map) {
   map.addLayer(layer_json);
   layers.push(layer_json)
   bus.$emit('select-layers', layers);
-  console.log('check', layers)
 };
 
 function windsock(jsondata) {
@@ -139,7 +137,7 @@ function windsock(jsondata) {
 
     var D = new Date(jsondata.time[t]);
     var msg = "Time step: " + D.toString();
-    document.getElementById("message").innerHTML = msg;
+    // document.getElementById("message").innerHTML = msg;
     requestAnimationFrame(draw);
   }
 
