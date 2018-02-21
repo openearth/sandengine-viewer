@@ -56,7 +56,7 @@ function addCanvas(jsondata, layers, map) {
     visibility: "none",
     id: 'meteo-layer',
     type: 'raster',
-    icon: 'filter_drama',
+    icon: 'cloud',
     source: {
       type: 'canvas',
       animate: true,

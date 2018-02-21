@@ -10,6 +10,8 @@ import {
 } from './components/map-draw.js';
 
 import {AddJetski} from './components/jetski.js'
+import {AddLidar} from './components/lidar.js'
+
 import {
   AddAeolian,
   ShowAeolianData
@@ -65,6 +67,7 @@ export default {
       AddMorphology(this.$refs.map.map, this.layers)
       AddAeolian(this.$refs.map.map, this.layers)
       AddJetski(this.$refs.map.map, this.layers)
+      AddLidar(this.$refs.map.map, this.layers)
       // TODO: Click event toevoegen
       this.map.on('mousemove', (e) => {
         this.$refs.map.map.getCanvas().style.cursor = '';
