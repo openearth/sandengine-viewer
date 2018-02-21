@@ -21,24 +21,19 @@ function AddMeteo(map, layers) {
 };
 
 function ShowMeteoData(ids){
-  fetch( "https://s3-eu-west-1.amazonaws.com/deltares-opendata/zandmotor/meteo/meteo_data.json")
+  fetch( "static/meteo_data_test1.json")
     .then((resp) => {
       return resp.json();
     })
     .then((json) => {
-      this.bokehplot(
-        "Barometer_Avg",
+      bokehplot(
+        "WindSpeed_Avg",
         document.getElementById(ids[0]),
         json
       );
-      this.bokehplot(
-        "WindSpeed_Avg",
-        document.getElementById(ids[1]),
-        json
-      );
-      this.bokehplot(
+      bokehplot(
         "RelHumidity_Avg",
-        document.getElementById(ids[2]),
+        document.getElementById(ids[1]),
         json
       );
     })
@@ -150,11 +145,11 @@ function windsock(jsondata) {
 function bokehplot(data, div, meteodata) {
   var plt = Bokeh.Plotting;
   var tools = "pan,crosshair,wheel_zoom,box_zoom,reset,save";
-  var begin = 500000
-  var end = 750000
-  var y = meteodata[data].data.slice(begin, end)
+  var begin = 0
+  var end = 100000
+  var y = meteodata[data].slice(begin, end)
   y = _.map(y, function(i) {
-    if (i >= 9.969209968386869e+36) {
+    if (i == -999) {
       return NaN
     } else {
       return i
@@ -173,23 +168,15 @@ function bokehplot(data, div, meteodata) {
   var plot = new plt.figure({
     title: meteodata[data].title,
     tools: tools,
-    width: 400,
-    height: 200,
+    width: 1000,
+    height: 350,
     x_axis_type: 'datetime',
     background_fill_color: "#F2F2F7"
   });
-  var line = new Bokeh.Line({
-    x: {
-      field: "x"
-    },
-    y: {
-      field: "y"
-    },
-    line_color: "#666699",
-    line_width: 2
-  });
 
-  plot.add_glyph(line, source);
+  var line = plot.line({field: 'x'}, {field: 'y'}, {source: source, legend: data, line_color: "#666699", line_width:2})
+
+  plot._legend.location = 'top_left';
   var doc = new Bokeh.Document();
   doc.add_root(plot);
   Bokeh.embed.add_document_standalone(doc, div);

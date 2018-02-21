@@ -10,6 +10,10 @@ import {
   ShowAeolianData
 } from './components/aeolian.js';
 import {
+  AddDrifters,
+  ShowDrifterData
+} from './components/drifters.js';
+import {
   AddMeteo,
   ShowMeteoData
 } from './components/meteo.js'
@@ -56,6 +60,7 @@ export default {
       AddMeteo(this.$refs.map.map, this.layers)
       AddMorphology(this.$refs.map.map, this.layers)
       AddAeolian(this.$refs.map.map, this.layers)
+      AddDrifters(this.$refs.map.map, this.layers)
 
       // TODO: Click event toevoegen
       this.map.on('mousemove', (e) => {
@@ -78,7 +83,7 @@ export default {
         if (click_lon <= lon_max && click_lat <= lat_max &&
           click_lon >= lon_min && click_lat >= lat_min) {
           var ids = []
-          var params = ["Barometer_Avg", "WindSpeed_Avg", "RelHumidity_Avg"]
+          var params = ["WindSpeed_Avg", "RelHumidity_Avg"]
           _.each(params, (p) => {
             this.plots.push(p)
             ids.push("plot_" + p)
