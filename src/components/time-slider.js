@@ -3,8 +3,6 @@ import _ from 'lodash';
 import Vue from 'vue';
 import moment from 'moment';
 import ionRangeslider from 'ion-rangeslider/js/ion.rangeSlider.js';
-import 'ion-rangeslider/css/ion.rangeSlider.css';
-import 'ion-rangeslider/css/ion.rangeSlider.skinHTML5.css';
 import 'font-awesome/css/font-awesome.css';
 
 const DAY_FORMAT = 'Y-MM-DD'
