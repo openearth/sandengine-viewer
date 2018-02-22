@@ -63,7 +63,6 @@
 <style>
 @import '~mapbox-gl/dist/mapbox-gl.css';
 
-
 #map {
   text-align: left;
   height: 60vh;
@@ -71,7 +70,7 @@
 }
 
 .hidden {
-  /* display: none; */
+  display: none;
 }
 
 #app {
@@ -80,23 +79,18 @@
 }
 
 #windsock-canvas {
+  display: none;
+  left: 0;
   position: fixed;
   top: 0;
-  left: 0;
   z-index: 5;
-  display: none;
 }
 
 .bartext {
   height: 10px;
-  width: 80%;
   margin-left: 10%;
   text-align: justify;
+  width: 80%;
 }
 
-span {
-  width: 100%;
-  height: 1em;
-  display: inline-block;
-}
 </style>
