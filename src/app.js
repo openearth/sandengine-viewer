@@ -133,5 +133,6 @@ export default {
   },
   components: {
     'layer-control': LayerControl,
+    'time-slider': TimeSlider
   }
 };
