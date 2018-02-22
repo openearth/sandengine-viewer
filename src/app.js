@@ -8,11 +8,12 @@ import MorphologyCanvas from './components/MorphologyCanvas';
 import TimeSlider from './components/TimeSlider';
 import {
   AddAeolian,
-  ShowAeolianData
+  ShowAeolianData,
+  filterAeolianBy
 } from './components/aeolian.js';
 import {
   AddDrifters,
-  ShowDrifterData
+  filterDrifterBy
 } from './components/drifters.js';
 import {
   AddMeteo,
@@ -58,6 +59,29 @@ export default {
 
     this.$refs.timeslider.$on('time-extent-update', (event) => {
       this.timeExtent = event;
+
+      // check which layers are active
+      var activeLayers = []
+      for (var i = 0; i < this.layers.length; i++) {
+          if (this.layers[i].active) {activeLayers.push(this.layers[i].id)}
+      };
+
+      // filter some map layers with filter options on time
+      if (activeLayers.indexOf("drifter-layer") > -1) {
+        filterDrifterBy(this.timeExtent,this.$refs.map.map);
+      };
+      if (activeLayers.indexOf("aeolian-layer") > -1) {
+        filterAeolianBy(this.timeExtent,this.$refs.map.map);
+      }
+
+      // filter all open Bokeh plots on TimeSlider
+      var keys = Object.keys(Bokeh.index)
+      var tstart = this.timeExtent[0].unix() * 1000;
+      var tend = this.timeExtent[1].unix() * 1000;
+      console.log(tend);
+      for (var i = 0; i < keys.length; i++) {
+        Bokeh.index[keys[i]].model.x_range.set({"start":tstart, "end":tend})
+      }
     })
 
     this.$refs.map.$on('mb-load', (event) => {

@@ -50,6 +50,18 @@ function AddAeolian(map, layers) {
   bus.$emit('select-layers', layers);
 }
 
+function filterAeolianBy(timeExtent, map) {
+  //timeExtent provides 2 moments
+  var tstart = timeExtent[0].unix();
+  var tend = timeExtent[1].unix();
+  var filters = [
+    "all",
+    ['>=', 'tStart', tstart],
+    ['<=', 'tEnd', tend],
+  ];
+  map.setFilter('aeolian-layer', filters);
+}
+
 function ShowAeolianData(point, div_id) {
   // todo check if multiple are selected; for now just select first
   var deploymentName = point.properties.deploymentName;
@@ -146,4 +158,4 @@ function bokehplot(locationID, deploymentName, timeseries, timeEnd, timeStart, p
   Bokeh.embed.add_document_standalone(doc, div);
 }
 
-export {AddAeolian, ShowAeolianData};
+export {AddAeolian, ShowAeolianData, filterAeolianBy};

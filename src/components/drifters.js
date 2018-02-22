@@ -6,36 +6,42 @@ import $ from 'jquery';
 
 function AddDrifters(map, layers) {
   var layer_json = {
-    id: 'drifter-layer',
     active: false,
-    visibility: "none",
     name: 'Drifters',
-    type: 'line',
-    cursor: 'pointer',
     icon: 'explore',
+    id: 'drifter-layer',
+    visibility: "visible",
+    type: 'line',
     source: {
       type: 'geojson',
       data: '/static/Drifters.geojson'
     },
     paint: {
       'line-color': ['get', 'color'],
+      'line-width': {
+        'base': 4.0,
+        'stops': [
+          [12, 2],
+          [22, 180]
+        ]
+      },
     }
   };
   map.addLayer(layer_json);
   layers.push(layer_json);
   bus.$emit('select-layers', layers);
-  //map.onLoad(filterDrifterBy())
 }
 
-function filterDrifterBy() {
-    var tstart = 1413200130;
-    var tend = 1413200232;
+function filterDrifterBy(timeExtent, map) {
+    //timeExtent provides 2 moments
+    var tstart = timeExtent[0].unix();
+    var tend = timeExtent[1].unix();
     var filters = [
       "all",
-      ['>=', 'timestamp', tstart],
-      ['<=', 'timestamp', tend],
+      ['>=', 'tStart', tstart],
+      ['<=', 'tEnd', tend],
     ];
-    map.setFilter('Drifters', filters);
+    map.setFilter('drifter-layer', filters);
 }
 
 export {AddDrifters, filterDrifterBy}

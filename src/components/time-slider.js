@@ -17,7 +17,7 @@ export default {
       type: Array,
       default () {
         let now = moment()
-        let then = now.clone().subtract(14, 'days')
+        let then = moment("20110301", "YYYYMMDD")
         return [then, now]
       }
     }

@@ -165,12 +165,20 @@ function bokehplot(data, div, meteodata) {
       y: y
     }
   });
+
+  // define ylabel based on source
+  var ylabels = {}
+  ylabels['RelHumidity_Avg'] = 'Relative Humidity [%]';
+  ylabels['WindSpeed_Avg'] = 'Wind speed 44 m above surface [m/s]';
+
   var plot = new plt.figure({
     title: meteodata[data].title,
     tools: tools,
     width: 1000,
     height: 350,
     x_axis_type: 'datetime',
+    x_axis_label: 'Time',
+    y_axis_label: ylabels[data],
     background_fill_color: "#F2F2F7"
   });
 
