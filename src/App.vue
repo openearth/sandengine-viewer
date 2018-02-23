@@ -31,12 +31,10 @@
     <v-container fluid fill-height>
       <v-layout fluid row wrap justify-space-between>
         <v-flex sm12 mb-2>
-          <h1 id="message">{{ msg }}</h1>
           <v-card id="map">
             <v-card-text>
               <v-mapbox access-token="pk.eyJ1Ijoic2lnZ3lmIiwiYSI6Il8xOGdYdlEifQ.3-JZpqwUa3hydjAJFXIlMA" map-style="mapbox://styles/mapbox/satellite-streets-v10" :center="[4.186, 52.050]" :zoom="13.16" :pitch="5.00" :bearing="-0" :min-zoom="5" id="map" ref="map">
                 <canvas id="windsock-canvas" width="200" height="200"></canvas>
-                <morphology-canvas></morphology-canvas>
                 <time-slider ref="timeslider"></time-slider>
               </v-mapbox>
             </v-card-text>

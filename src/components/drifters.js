@@ -14,7 +14,7 @@ function AddDrifters(map, layers) {
     type: 'line',
     source: {
       type: 'geojson',
-      data: '/static/Drifters.geojson'
+      data: 'https://s3-eu-west-1.amazonaws.com/deltares-opendata/zandmotor/drifters/drifters.geojson'
     },
     paint: {
       'line-color': ['get', 'color'],
