@@ -15,8 +15,8 @@ function AddLidar(map, layers) {
 }
 
 function get_images_urls(json_data, map, layers) {
-  // var SERVER_URL = 'http://hydro-engine.appspot.com'
-  var SERVER_URL = 'http://localhost:8080'
+  var SERVER_URL = 'http://hydro-engine.appspot.com'
+  // var SERVER_URL = 'http://localhost:8080'
   var image_urls = fetch(SERVER_URL + '/get_image_urls', {
       method: "POST",
       body: JSON.stringify(json_data),
