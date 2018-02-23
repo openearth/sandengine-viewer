@@ -1,7 +1,7 @@
 <template>
 <v-app>
   <!-- TODO: temporary off and fix that the drawer collapses again -->
-  <v-navigation-drawer fixed clipped app v-model="drawer">
+  <v-navigation-drawer fixed app v-model="drawer">
     <v-toolbar flat>
       <v-list>
         <v-list-tile>
