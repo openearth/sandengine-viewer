@@ -15,8 +15,13 @@ import {AddLidar} from './components/lidar.js'
 
 import {
   AddAeolian,
-  ShowAeolianData
+  ShowAeolianData,
+  filterAeolianBy
 } from './components/aeolian.js';
+import {
+  AddDrifters,
+  filterDrifterBy
+} from './components/drifters.js';
 import {
   AddMeteo,
   ShowMeteoData
@@ -60,6 +65,28 @@ export default {
 
     this.$refs.timeslider.$on('time-extent-update', (event) => {
       this.timeExtent = event;
+
+      // check which layers are active
+      var activeLayers = []
+      for (var i = 0; i < this.layers.length; i++) {
+          if (this.layers[i].active) {activeLayers.push(this.layers[i].id)}
+      };
+
+      // filter some map layers with filter options on time
+      if (activeLayers.indexOf("drifter-layer") > -1) {
+        filterDrifterBy(this.timeExtent,this.$refs.map.map);
+      };
+      if (activeLayers.indexOf("aeolian-layer") > -1) {
+        filterAeolianBy(this.timeExtent,this.$refs.map.map);
+      }
+
+      // filter all open Bokeh plots on TimeSlider
+      var keys = Object.keys(Bokeh.index)
+      var tstart = this.timeExtent[0].unix() * 1000;
+      var tend = this.timeExtent[1].unix() * 1000;
+      for (var i = 0; i < keys.length; i++) {
+        Bokeh.index[keys[i]].model.x_range.set({"start":tstart, "end":tend})
+      }
     })
 
     this.$refs.map.$on('mb-load', (event) => {
@@ -70,8 +97,10 @@ export default {
       AddMeteo(this.$refs.map.map, this.layers)
       AddMorphology(this.$refs.map.map, this.layers)
       AddAeolian(this.$refs.map.map, this.layers)
+      AddDrifters(this.$refs.map.map, this.layers)
       AddJetski(this.$refs.map.map, this.layers)
       AddLidar(this.$refs.map.map, this.layers)
+
       // TODO: Click event toevoegen
       this.map.on('mousemove', (e) => {
         this.$refs.map.map.getCanvas().style.cursor = '';
@@ -84,7 +113,6 @@ export default {
       this.map.on('click', (e) => {
         var click_lon = e.lngLat.lng
         var click_lat = e.lngLat.lat
-
         // WHen meteo-layer is visible and clicked on
         if (this.map.getLayer('meteo-layer').visibility === 'visible') {
           var meteo = this.layers.find(item => item.id === "meteo-layer")

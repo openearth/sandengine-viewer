@@ -50,6 +50,18 @@ function AddAeolian(map, layers) {
   bus.$emit('select-layers', layers);
 }
 
+function filterAeolianBy(timeExtent, map) {
+  //timeExtent provides 2 moments
+  var tstart = timeExtent[0].unix();
+  var tend = timeExtent[1].unix();
+  var filters = [
+    "all",
+    ['>=', 'tStart', tstart],
+    ['<=', 'tEnd', tend],
+  ];
+  map.setFilter('aeolian-layer', filters);
+}
+
 function ShowAeolianData(point, div_id) {
   // todo check if multiple are selected; for now just select first
   var deploymentName = point.properties.deploymentName;
@@ -119,7 +131,7 @@ function bokehplot(locationID, deploymentName, timeseries, timeEnd, timeStart, p
   var colors = ["#666699", "#66ff66", "#ff6666"];
 
   for (var i = 0; i < heights.length; i++) {
-    var height = locationIDdata[heights[i]]['height'];
+    var height = 'height ' + locationIDdata[heights[i]]['height'].toString() + ' m';
     var y = data[locationID][heights[i]]['particle_counts'];
     y = y.slice(begin, end);
 
@@ -137,22 +149,13 @@ function bokehplot(locationID, deploymentName, timeseries, timeEnd, timeStart, p
       }
     });
 
-    var line = new Bokeh.Line({
-      x: {
-        field: "x"
-      },
-      y: {
-        field: "y"
-      },
-      line_color: colors[i],
-      line_width: 2
-    });
-    plot.add_glyph(line, source);
+    var line = plot.line({field: 'x'}, {field: 'y'}, {source: source, legend: height , line_color:colors[i], line_width:2})
   }
 
+  plot._legend.location = 'top_left';
   var doc = new Bokeh.Document();
   doc.add_root(plot);
   Bokeh.embed.add_document_standalone(doc, div);
 }
 
-export {AddAeolian, ShowAeolianData}
+export {AddAeolian, ShowAeolianData, filterAeolianBy};
