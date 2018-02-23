@@ -7,12 +7,6 @@ export default {
       type: Array,
       required: true
     },
-    legends: {
-      type: Array,
-	default: function(){
-	    return [];
-	}
-    },
     map: {
       type: Object
     }
