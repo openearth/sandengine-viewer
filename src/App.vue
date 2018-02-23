@@ -1,7 +1,7 @@
 <template>
 <v-app>
   <!-- TODO: temporary off and fix that the drawer collapses again -->
-  <v-navigation-drawer fixed temporary clipped app v-model="drawer">
+  <v-navigation-drawer fixed clipped app v-model="drawer">
     <v-toolbar flat>
       <v-list>
         <v-list-tile>
@@ -11,7 +11,7 @@
         </v-list-tile>
       </v-list>
     </v-toolbar>
-    <layer-control :layers="layers" :legend="legends" :map="map"></layer-control>
+    <layer-control :layers="layers" :map="map"></layer-control>
 
   </v-navigation-drawer>
   <v-toolbar light app clipped-left fixed>
