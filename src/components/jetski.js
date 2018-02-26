@@ -46,7 +46,8 @@ function AddLayers(urls, map, layers){
     "active": false,
     "icon":"landscape",
     "data": [],
-    "type": "group"
+    "type": "group",
+    "info": "Zandmotor bathymetric and topographic survey, gridded on 20m grid. <a href='https://data.4tu.nl/repository/uuid:c40da555-3eff-4c3c-89d6-136994a07120'>Data link</a>"
   }
 
   _.each(urls, (url) => {

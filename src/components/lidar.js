@@ -42,7 +42,8 @@ function AddLayers(urls, map, layers){
     "active": false,
     "icon":"fa-plane",
     "data": [],
-    "type": "group"
+    "type": "group",
+    "info": "Elevation measurements of the dutch coast done with LIDAR. <a href='https://data.4tu.nl/repository/uuid:8a8a91bc-e520-4d19-a127-5fd2232cc58e'>Data link</a>"
   }
 
   _.each(urls, (url) => {
