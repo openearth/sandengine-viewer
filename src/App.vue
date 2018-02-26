@@ -83,12 +83,4 @@
   top: 0;
   z-index: 5;
 }
-
-.bartext {
-  height: 10px;
-  margin-left: 10%;
-  text-align: justify;
-  width: 80%;
-}
-
 </style>

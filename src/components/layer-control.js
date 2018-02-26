@@ -12,12 +12,9 @@ export default {
     }
   },
   data() {
-    return {
-    };
+    return {};
   },
-  mounted() {
-    console.log('mounted layer-control', this);
-  },
+  mounted() {},
   watch: {
     // Watch "layers". This is a switch, which can toggle a layer on or off
     // When toggled, this watcher will activate the toggleLayers function.
@@ -30,8 +27,6 @@ export default {
   },
   methods: {
     toggleLayers() {
-      console.log('toggling with map', this, this.map, this.layers);
-
       if (_.isNil(this.map)) {
         return;
       }
