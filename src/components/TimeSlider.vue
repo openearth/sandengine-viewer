@@ -12,8 +12,9 @@
     </div>
 
     <!-- TODO: use toolbar or whatever... -->
-    <v-btn-toggle v-model="state" mandatory >
+    <v-btn-toggle v-model="state" mandatory v-if="showPlay">
       <!-- call play function so timer gets updated -->
+      <!-- TODO: use buttons that stay pressed (lookup material design guideline) -->
       <v-btn value="playing" flat @click.stop="play">
         <v-icon>fa-play</v-icon>
       </v-btn>
@@ -21,7 +22,7 @@
         <v-icon>fa-pause</v-icon>
       </v-btn>
     </v-btn-toggle>
-    <v-btn-toggle v-model="loop">
+    <v-btn-toggle v-model="loop" v-if="showPlay">
       <!-- somehow this ends op as null/true instead of false/true -->
       <v-btn :value="true" flat>
         <v-icon>fa-repeat</v-icon>

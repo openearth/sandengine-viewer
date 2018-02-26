@@ -10,6 +10,10 @@ const DAY_FORMAT = 'Y-MM-DD'
 export default {
   name: "time-slider",
   props: {
+    showPlay: {
+      type: Boolean,
+      default: true
+    },
     // the maximum extent for this slider
     extent: {
       type: Array,
