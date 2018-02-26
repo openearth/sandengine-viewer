@@ -101,9 +101,11 @@ function bokehplot(profile_data, data, div_id) {
   var plot = new plt.figure({
     title: data.dataset,
     tools: tools,
-    width: 400,
-    height: 200,
-    background_fill_color: "#F2F2F7"
+    width: 800,
+    height: 350,
+    background_fill_color: "#F2F2F7",
+    x_axis_label: 'Distance w.r.t. first coordinate [m]',
+    y_axis_label: 'Elevation [m, NAP]',
   });
   var line = new Bokeh.Line({
     x: {

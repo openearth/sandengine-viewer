@@ -42,7 +42,7 @@ function get_images_urls(json_data, map, layers) {
 
 function AddLayers(urls, map, layers){
   var grouplayer = {
-    "name": "Jetski",
+    "name": "Jetski bathymetry [m, NAP]",
     "active": false,
     "icon":"landscape",
     "data": [],

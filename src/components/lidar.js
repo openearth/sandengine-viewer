@@ -38,7 +38,7 @@ function get_images_urls(json_data, map, layers) {
 
 function AddLayers(urls, map, layers){
   var grouplayer = {
-    "name": "Lidar",
+    "name": "LiDAR elevation [m, NAP]",
     "active": false,
     "icon":"fa-plane",
     "data": [],

@@ -9,7 +9,7 @@ function AddAeolian(map, layers) {
     id: 'aeolian-layer',
     active: true,
     visibility: "visible",
-    name: 'Aeolian',
+    name: 'Aeolian transport',
     type: 'circle',
     cursor: 'pointer',
     icon: 'grain',
@@ -117,7 +117,7 @@ function bokehplot(locationID, deploymentName, timeseries, timeEnd, timeStart, p
   var plot = new plt.figure({
     title: "Deployment: " + deploymentName + " Location: " + locationID + "\n Start deployment: " + timeStart + " End deployment: " + timeEnd,
     tools: tools,
-    width: 1000,
+    width: 800,
     height: 350,
     x_axis_type: 'datetime',
     x_axis_label: 'Time',
