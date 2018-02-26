@@ -34,8 +34,8 @@ function DrawControls(map, plots, dataset, layers) {
 
 
 function download_raster_profile(region, dataset, scale, begin_date, end_date, div_id) {
-  // var SERVER_URL = 'http://hydro-engine.appspot.com'
-  var SERVER_URL = 'http://localhost:8080'
+  var SERVER_URL = 'http://hydro-engine.appspot.com'
+  // var SERVER_URL = 'http://localhost:8080'
   var data = {
     'polyline': region,
     "dataset": dataset,
