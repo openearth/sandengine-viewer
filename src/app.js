@@ -10,9 +10,9 @@ import {
   DrawControls
 } from './components/map-draw.js';
 
-import {AddJetski} from './components/jetski.js'
+import {updateJetski} from './components/jetski.js'
 import {AddLidar} from './components/lidar.js'
-
+import {AddADCP, ShowADCPData} from './components/adcp.js'
 import {
   AddAeolian,
   ShowAeolianData,
@@ -65,19 +65,20 @@ export default {
 
     this.$refs.timeslider.$on('time-extent-update', (event) => {
       this.timeExtent = event;
-
       // check which layers are active
       var activeLayers = []
       for (var i = 0; i < this.layers.length; i++) {
           if (this.layers[i].active) {activeLayers.push(this.layers[i].id)}
       };
-
       // filter some map layers with filter options on time
       if (activeLayers.indexOf("drifter-layer") > -1) {
         filterDrifterBy(this.timeExtent,this.$refs.map.map);
       };
       if (activeLayers.indexOf("aeolian-layer") > -1) {
         filterAeolianBy(this.timeExtent,this.$refs.map.map);
+      }
+      if (activeLayers.indexOf("Jetski") > -1) {
+        updateJetski(this.$refs.map.map, this.layers, this.timeExtent[0], this.timeExtent[1]);
       }
 
       // filter all open Bokeh plots on TimeSlider
@@ -98,9 +99,10 @@ export default {
       AddMorphology(this.$refs.map.map, this.layers)
       AddAeolian(this.$refs.map.map, this.layers)
       AddDrifters(this.$refs.map.map, this.layers)
-      AddJetski(this.$refs.map.map, this.layers)
+      // AddJetski(this.$refs.map.map, this.layers)
       AddLidar(this.$refs.map.map, this.layers)
-
+      // AddADCP(this.$refs.map.map, this.layers)
+      updateJetski(this.$refs.map.map, this.layers)
       // TODO: Click event toevoegen
       this.map.on('mousemove', (e) => {
         this.$refs.map.map.getCanvas().style.cursor = '';
@@ -146,7 +148,12 @@ export default {
             this.plots.push(div_id)
             bus.$emit('click-plots', this.plots);
             ShowAeolianData(point, "plot_" + div_id)
-          }
+        } else if (point.layer.id == "adcp-layer") {
+          var div_id = point.properties.location_ID
+          this.plots.push(div_id)
+          bus.$emit('click-plots', this.plots);
+          ShowADCPData(point, "plot_" + div_id)
+        }
         })
       });
     })

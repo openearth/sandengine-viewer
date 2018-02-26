@@ -26,7 +26,7 @@ function DrawControls(map, plots, dataset, layers) {
       var div_id = JSON.stringify(region)
       plots.push(div_id)
       bus.$emit('click-plots', plots);
-      var profile = download_raster_profile(region.features[0].geometry, dataset, 20, begin_date, end_date, div_id)
+      var profile = download_raster_profile(region.features[region.features.length-1].geometry, dataset, 20, begin_date, end_date, div_id)
     // }
   })
 
