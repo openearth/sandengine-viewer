@@ -14,6 +14,7 @@
     <v-list-tile>
       <div :style="layer.css" class='bar'></div>
       <div class='bartext'>{{layer.range}} <span> </span> </div>
+      <div class='info' v-html="layer.info" >{{layer.info}} </div>
     </v-list-tile>
   </v-list>
 </div>

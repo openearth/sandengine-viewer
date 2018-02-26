@@ -25,6 +25,7 @@ function AddMorphology(map, layers) {
       background: linear-gradient(to right, \
       hsla(0, 100%, 50%, 0.5), \
       rgba(255, 255, 0, 0.5));",
+    "info": "Sediment sampling data from measurement campaign at the Sand Motor. <a href='https://data.4tu.nl/repository/uuid:598c390b-2368-4670-bc8c-d0b3ae09dd79'>Data link</a>",
     paint: {
       "circle-color": {
                     "base": 1,
