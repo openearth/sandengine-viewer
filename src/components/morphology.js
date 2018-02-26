@@ -17,12 +17,7 @@ function AddMorphology(map, layers) {
       "data": "static/sediment_data.geojson"
     },
     "range": "0  400",
-    "css": "height: 10px; \
-      width: 80%; \
-      margin-left: 10%; \
-      text-align: justify; \
-      padding-top: 10px; \
-      background: linear-gradient(to right, \
+    "css": "background: linear-gradient(to right, \
       hsla(0, 100%, 50%, 0.5), \
       rgba(255, 255, 0, 0.5));",
     "info": "Sediment sampling data from measurement campaign at the Sand Motor. <a href='https://data.4tu.nl/repository/uuid:598c390b-2368-4670-bc8c-d0b3ae09dd79'>Data link</a>",
