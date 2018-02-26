@@ -11,36 +11,46 @@
       </v-list-tile-action>
     </v-list-tile>
 
-    <v-list-tile>
-      <div class="bar-wrapper">
-        <div :style="layer.css" class='bar'></div>
-        <div class='bartext'>{{layer.range}} <span class='barspan'> </span> </div>
-        <div class='information' v-html="layer.info" >{{layer.info}} </div>
-      </div>
-    </v-list-tile>
+    <div class="bar-wrapper">
+      <div :style="layer.css" class='bar' v-if="layer.css"></div>
+      <div class='bartext'>{{layer.range}} <span class='barspan'> </span> </div>
+      <div class='information' v-html="layer.info" >{{layer.info}} </div>
+    </div>
   </v-list>
 </div>
 </template>
 
 <script src="./layer-control.js"></script>
 
-<style>
+<style scoped>
 .bartext {
-  height: 10px;
-  margin-left: 10%;
   text-align: justify;
-  width: 80%;
+  width: 100%;
   clear: left;
 }
 
+.bar {
+  width: 100%;
+  height: 10px;
+}
 .barspan {
   width: 100%;
-  height: 1em;
+
   display: inline-block;
+}
+.information {
+  /* TODO: remove span trick? */
+  margin-top: -1rem;
+  text-align: left;
 }
 
 .bar-wrapper {
+  padding: 0 16px;
   display: block;
   width: 100%;
+  margin-bottom: 10px;
+}
+.legend .list__tile {
+  height: 200px;
 }
 </style>

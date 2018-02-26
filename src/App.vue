@@ -40,7 +40,6 @@
             </v-card-text>
           </v-card>
         </v-flex>
-
         <v-card :id="'card_'+ plot" v-for="plot in plots" :key="plot" class="mb-1 mr-1">
           <v-card-actions>
             <v-btn flat icon v-on:click="removePlot(plot, $event)">
@@ -60,6 +59,7 @@
 <script src="./app.js"></script>
 <style>
 @import '~mapbox-gl/dist/mapbox-gl.css';
+@import '~material-design-icons/iconfont/material-icons.css';
 
 #map {
   text-align: left;
