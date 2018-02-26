@@ -6,7 +6,7 @@ import $ from 'jquery';
 
 function AddMorphology(map, layers) {
   var layer_json = {
-    "name": "Sediment distribution",
+    "name": "Sediment D50 [µm]",
     "active": false,
     "visibility": "None",
     "icon": "grain",
