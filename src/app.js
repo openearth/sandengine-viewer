@@ -12,7 +12,7 @@ import {
 
 import {updateJetski} from './components/jetski.js'
 import {AddLidar} from './components/lidar.js'
-
+import {AddADCP, ShowADCPData} from './components/adcp.js'
 import {
   AddAeolian,
   ShowAeolianData,
@@ -101,6 +101,7 @@ export default {
       AddDrifters(this.$refs.map.map, this.layers)
       // AddJetski(this.$refs.map.map, this.layers)
       AddLidar(this.$refs.map.map, this.layers)
+      AddADCP(this.$refs.map.map, this.layers)
       updateJetski(this.$refs.map.map, this.layers)
       console.log('checkerdecheck')
       // TODO: Click event toevoegen
@@ -148,7 +149,12 @@ export default {
             this.plots.push(div_id)
             bus.$emit('click-plots', this.plots);
             ShowAeolianData(point, "plot_" + div_id)
-          }
+        } else if (point.layer.id == "adcp-layer") {
+          var div_id = point.properties.location_ID
+          this.plots.push(div_id)
+          bus.$emit('click-plots', this.plots);
+          ShowADCPData(point, "plot_" + div_id)
+        }
         })
       });
     })
