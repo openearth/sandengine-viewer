@@ -9,7 +9,7 @@ function AddAeolian(map, layers) {
     id: 'aeolian-layer',
     active: true,
     visibility: "visible",
-    name: 'Aeolian',
+    name: 'Aeolian transport',
     type: 'circle',
     cursor: 'pointer',
     icon: 'grain',
@@ -17,6 +17,7 @@ function AddAeolian(map, layers) {
       type: 'geojson',
       data: '/static/aeolian_data.geojson'
     },
+      "info": "Processed data on aeolian sediment transport from the 6-week MegaPeX field campaign at the Sand Motor mega nourishment. <a href='https://data.4tu.nl/repository/uuid:3bc3591b-9d9e-4600-8705-5b7eba6aa3ed'>Data link</a>",
     paint: {
       // make circles larger as the user zooms from z12 to z22
       'circle-radius': {
@@ -117,7 +118,7 @@ function bokehplot(locationID, deploymentName, timeseries, timeEnd, timeStart, p
   var plot = new plt.figure({
     title: "Deployment: " + deploymentName + " Location: " + locationID + "\n Start deployment: " + timeStart + " End deployment: " + timeEnd,
     tools: tools,
-    width: 1000,
+    width: 800,
     height: 350,
     x_axis_type: 'datetime',
     x_axis_label: 'Time',

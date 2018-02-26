@@ -101,9 +101,8 @@ export default {
       AddDrifters(this.$refs.map.map, this.layers)
       // AddJetski(this.$refs.map.map, this.layers)
       AddLidar(this.$refs.map.map, this.layers)
-      AddADCP(this.$refs.map.map, this.layers)
+      // AddADCP(this.$refs.map.map, this.layers)
       updateJetski(this.$refs.map.map, this.layers)
-      console.log('checkerdecheck')
       // TODO: Click event toevoegen
       this.map.on('mousemove', (e) => {
         this.$refs.map.map.getCanvas().style.cursor = '';

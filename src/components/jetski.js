@@ -72,7 +72,9 @@ function updateLayers(urls, map, layers) {
           #f6e95d,#f7e65d,#f8e35e,#f9e15f,#fade60,#fadc61,#fbd962,#fcd663,#fdd463,\
           #fdd164,#fecf65,#ffcc66,#fdc861,#fcc55d,#fbc158,#f9be53,#f7ba4f,#f6b64a,\
           #f5b346,#f3af41,#f1ac3c,#f0a838,#efa433,#eda12e,#eb9d2a,#ea9a25,#e99620,\
-          #e7931c,#e58f17,#e48b13,#e3880e,#e18409,#df8105,#de7d00);"
+          #e7931c,#e58f17,#e48b13,#e3880e,#e18409,#df8105,#de7d00);",
+          "info": "Zandmotor bathymetric and topographic survey, gridded on 20m grid. <a href='https://data.4tu.nl/repository/uuid:c40da555-3eff-4c3c-89d6-136994a07120'>Data link</a>"
+
     }
     layers.push(jetski);
   }

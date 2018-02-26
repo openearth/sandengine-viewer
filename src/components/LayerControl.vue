@@ -15,6 +15,7 @@
       <div class="bar-wrapper">
         <div :style="layer.css" class='bar'></div>
         <div class='bartext'>{{layer.range}} <span class='barspan'> </span> </div>
+        <div class='information' v-html="layer.info" >{{layer.info}} </div>
       </div>
     </v-list-tile>
   </v-list>
