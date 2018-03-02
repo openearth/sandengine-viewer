@@ -27,7 +27,8 @@ import {
   ShowMeteoData
 } from './components/meteo.js'
 import {
-  AddMorphology
+  AddMorphology,
+  filterMorphologyBy  
 } from './components/morphology.js'
 export default {
   name: 'app',
@@ -77,6 +78,9 @@ export default {
       if (activeLayers.indexOf("aeolian-layer") > -1) {
         filterAeolianBy(this.timeExtent,this.$refs.map.map);
       }
+      if (activeLayers.indexOf("morphology-layer") > -1) {
+        filterMorphologyBy(this.timeExtent,this.$refs.map.map);
+      }	
       if (activeLayers.indexOf("Jetski") > -1) {
         updateJetski(this.$refs.map.map, this.layers, this.timeExtent[0], this.timeExtent[1]);
       }

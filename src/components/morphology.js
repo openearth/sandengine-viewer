@@ -10,7 +10,7 @@ function AddMorphology(map, layers) {
     "active": false,
     "visibility": "None",
     "icon": "grain",
-    "id": "measurements",
+    "id": "morphology-layer",
     "type": "circle",
     "source": {
       "type": "geojson",
@@ -45,6 +45,18 @@ function AddMorphology(map, layers) {
   layers.push(layer_json)
     bus.$emit('select-layers', layers);
     bus.$emit('add-legend', 'test');
+}
+
+function filterMorphologyBy(timeExtent, map) {
+  //timeExtent provides 2 moments
+  var tstart = timeExtent[0].unix();
+  var tend = timeExtent[1].unix();
+  var filters = [
+    "all",
+    ['>=', 'time', tstart],
+    ['<=', 'time', tend],
+  ];
+  map.setFilter('morphology-layer', filters);
 }
 
 function ShowMorphologyData(data){
@@ -100,5 +112,5 @@ function bokehplot(data, div, meteodata) {
 }
 
 export {
-  AddMorphology, ShowMorphologyData
+    AddMorphology, filterMorphologyBy, ShowMorphologyData
 }
