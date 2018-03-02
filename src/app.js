@@ -7,7 +7,8 @@ import LayerControl from './components/LayerControl';
 import MorphologyCanvas from './components/MorphologyCanvas';
 import TimeSlider from './components/TimeSlider';
 import {
-  DrawControls
+  DrawControls,
+  addBathymetryPlot
 } from './components/map-draw.js';
 
 import {updateJetski} from './components/jetski.js'
@@ -81,12 +82,18 @@ export default {
         updateJetski(this.$refs.map.map, this.layers, this.timeExtent[0], this.timeExtent[1]);
       }
 
+      console.log(Bokeh)
       // filter all open Bokeh plots on TimeSlider
       var keys = Object.keys(Bokeh.index)
       var tstart = this.timeExtent[0].unix() * 1000;
       var tend = this.timeExtent[1].unix() * 1000;
       for (var i = 0; i < keys.length; i++) {
+        if (Bokeh.index[keys[i]].model.attributes.above["0"].attributes.plot.attributes.title =="bathymetry_jetski" ) {
+          addBathymetryPlot(tstart, tend, "bathymetry_jetski", Bokeh.index[keys[i]].model.attributes.above["0"].attributes.plot)
+        }
+        // if (Bokeh.index[keys[i]].model.x_axis_type === "DateTime"){
         Bokeh.index[keys[i]].model.x_range.set({"start":tstart, "end":tend})
+      // }
       }
     })
 
@@ -101,7 +108,7 @@ export default {
       AddDrifters(this.$refs.map.map, this.layers)
       // AddJetski(this.$refs.map.map, this.layers)
       AddLidar(this.$refs.map.map, this.layers)
-      // AddADCP(this.$refs.map.map, this.layers)
+      AddADCP(this.$refs.map.map, this.layers)
       updateJetski(this.$refs.map.map, this.layers)
       // TODO: Click event toevoegen
       this.map.on('mousemove', (e) => {
@@ -125,7 +132,7 @@ export default {
           if (click_lon <= lon_max && click_lat <= lat_max &&
             click_lon >= lon_min && click_lat >= lat_min) {
             var ids = []
-            var params = ["Barometer_Avg", "WindSpeed_Avg", "RelHumidity_Avg"]
+            var params = ["WindSpeed_Avg", "RelHumidity_Avg"]
             _.each(params, (p) => {
               this.plots.push(p)
               ids.push("plot_" + p)

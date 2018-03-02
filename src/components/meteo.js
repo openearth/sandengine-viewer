@@ -166,9 +166,8 @@ function bokehplot(data, div, meteodata) {
   var ylabels = {}
   ylabels['RelHumidity_Avg'] = 'Relative Humidity [%]';
   ylabels['WindSpeed_Avg'] = 'Wind speed 44 m above surface [m/s]';
-
   var plot = new plt.figure({
-    title: meteodata[data].title,
+    title: data,
     tools: tools,
     width: 1000,
     height: 350,

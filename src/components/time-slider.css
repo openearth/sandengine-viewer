@@ -4,8 +4,9 @@
 .time-slider {
   position: absolute;
   z-index: 1;
+  margin: auto;
+  margin-left: 30%;
   /* override nav margin-top */
-  margin-top: 20px !important;
 }
 .slider {
   width: 500px;
