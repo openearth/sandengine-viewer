@@ -14,7 +14,7 @@ function AddDrifters(map, layers) {
     type: 'line',
     source: {
       type: 'geojson',
-      data: 'https://s3-eu-west-1.amazonaws.com/deltares-opendata/zandmotor/drifters/drifters.geojson'
+      data: 'https://s3-eu-west-1.amazonaws.com/deltares-opendata/zandmotor/drifters/drifters.geojson',
     },
       "info": "Drifter data as measured with GPS-tracked drifters during the megapex 2014 field campaign. Experiments have been done during ebb and flood and in a rip current. <a href='https://data.4tu.nl/repository/uuid:7f190c88-ae2e-43cf-959c-2b7d5c321573'>Data link</a>",
     paint: {

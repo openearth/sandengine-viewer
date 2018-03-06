@@ -13,7 +13,7 @@ import {
 
 import {updateJetski} from './components/jetski.js'
 import {AddLidar} from './components/lidar.js'
-import {AddADCP, ShowADCPData} from './components/adcp.js'
+import {AddADCP, ShowADCPData,filterADCPBy} from './components/adcp.js'
 import {
   AddAeolian,
   ShowAeolianData,
@@ -78,22 +78,23 @@ export default {
       if (activeLayers.indexOf("aeolian-layer") > -1) {
         filterAeolianBy(this.timeExtent,this.$refs.map.map);
       }
+      //if (activeLayers.indexOf("adcp-layer") > -1) {
+      //  filterADCPBy(this.timeExtent,this.$refs.map.map);
+      //}
       if (activeLayers.indexOf("Jetski") > -1) {
         updateJetski(this.$refs.map.map, this.layers, this.timeExtent[0], this.timeExtent[1]);
       }
 
-      console.log(Bokeh)
       // filter all open Bokeh plots on TimeSlider
       var keys = Object.keys(Bokeh.index)
       var tstart = this.timeExtent[0].unix() * 1000;
       var tend = this.timeExtent[1].unix() * 1000;
       for (var i = 0; i < keys.length; i++) {
-        if (Bokeh.index[keys[i]].model.attributes.above["0"].attributes.plot.attributes.title =="bathymetry_jetski" ) {
-          addBathymetryPlot(tstart, tend, "bathymetry_jetski", Bokeh.index[keys[i]].model.attributes.above["0"].attributes.plot)
+        var array1 = Bokeh.index[keys[i]].model.attributes.renderers;
+        if (array1.map(x => x.type).indexOf('DatetimeAxis') > 0) { // check if bokeh plot contains DatetimeAxis
+          Bokeh.index[keys[i]].model.x_range.start = tstart
+          Bokeh.index[keys[i]].model.x_range.end = tend
         }
-        // if (Bokeh.index[keys[i]].model.x_axis_type === "DateTime"){
-        Bokeh.index[keys[i]].model.x_range.set({"start":tstart, "end":tend})
-      // }
       }
     })
 
@@ -139,7 +140,6 @@ export default {
               bus.$emit('click-plots', this.plots);
             })
             ShowMeteoData(ids)
-
           }
         }
         // When clicked on a feature of Morphology or aeolian
@@ -151,15 +151,19 @@ export default {
             bus.$emit('click-plots', this.plots);
             // ShowMorphologyData(point.properties, "plot_" + div_id)
           } else if (point.layer.id == "aeolian-layer") {
-            var div_id = "Particle_" + point.properties.location_ID
+            var div_id = "Particle_" + point.properties.deploymentName + "_" + point.properties.location_ID
             this.plots.push(div_id)
             bus.$emit('click-plots', this.plots);
             ShowAeolianData(point, "plot_" + div_id)
         } else if (point.layer.id == "adcp-layer") {
-          var div_id = point.properties.location_ID
-          this.plots.push(div_id)
-          bus.$emit('click-plots', this.plots);
-          ShowADCPData(point, "plot_" + div_id)
+          var ids = []
+          var params = [point.properties.ADCPID +'_adcp-f-1', point.properties.ADCPID +'_adcp-f-2']
+          _.each(params, (p) => {
+            this.plots.push(p)
+            ids.push("plot_" + p)
+            bus.$emit('click-plots', this.plots);
+          })
+          ShowADCPData(point, ids)
         }
         })
       });
