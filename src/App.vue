@@ -20,13 +20,25 @@
       Zandmotor data
     </v-toolbar-title>
     <time-slider ref="timeslider" :show-play="false"></time-slider>
+
     <v-spacer></v-spacer>
-    <a class="btn btn--flat btn--router" icon large href='http://www.dezandmotor.nl/en/'>
-      <v-avatar size="32px" tile>
-        <!-- todo replace by company logo -->
-        <img src="http://www.dezandmotor.nl/assets/images/logo-de-zandmotor.png" alt="Logo">
+      <v-avatar width="64px">
+        <a class="btn btn--flat btn--router" icon large href='http://www.dezandmotor.nl/en/' target="parent">
+          <img src="src/assets/NatureCoastLogo.png" alt="Logo">
+        </a>
       </v-avatar>
-    </a>
+    <v-avatar size="64px">
+        <a class="btn btn--flat btn--router" icon large href='http://www.stw.nl/en' target="parent">
+          <img src="src/assets/STWlogo.png" alt="Logo">
+        </a>
+    </v-avatar>
+    <v-avatar size="64px">
+        <a class="btn btn--flat btn--router" icon large href='https://github.com/openearth/sandmotor-viewer' target="parent">
+          <img src="src/assets/GitHub-Mark.png" alt="Logo">
+        </a>
+    </v-avatar>
+    <a href="mailto:Arjen.Luijendijk@deltares.nlSubject=Contact%20Zandmotor%20data" target="_top">contact</a>
+
   </v-toolbar>
   <v-content>
     <v-container fluid fill-height>

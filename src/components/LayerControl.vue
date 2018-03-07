@@ -8,6 +8,7 @@
       <v-list-tile-title>{{layer.name}}</v-list-tile-title>
       <v-list-tile-action>
         <v-icon>{{layer.icon}}</v-icon>
+        <v-btn v-on:click.native="addInfoCard(layer.id)"><v-icon>fa-question</v-icon></v-btn>
       </v-list-tile-action>
     </v-list-tile>
 

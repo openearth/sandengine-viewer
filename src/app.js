@@ -56,10 +56,13 @@ export default {
     bus.$on('add-layer', (layer) => {
       this.layers.push(layer);
     });
+    bus.$on('add-card', (card) => {
+      this.plots.push(card);
+    });
+
     bus.$on('click-plots', (plots) => {
       Vue.set(this, 'plots', plots);
     });
-
     bus.$on('map-loaded', (event) => {
       Vue.set(this, 'map', event.target);
     });

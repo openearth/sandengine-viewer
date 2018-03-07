@@ -1,4 +1,8 @@
 import _ from 'lodash';
+import moment from 'moment';
+import {
+  bus
+} from '@/event-bus.js';
 
 export default {
   name: 'layer-control',
@@ -12,7 +16,9 @@ export default {
     }
   },
   data() {
-    return {};
+    return {
+      btnInfo: null
+    };
   },
   mounted() {},
   watch: {
@@ -23,9 +29,23 @@ export default {
         this.toggleLayers();
       },
       deep: true
-    }
+    },
   },
   methods: {
+    addInfoCard(layerName) {
+      // make unique ID
+      var now = moment(new Date()).unix()
+      var layerID = layerName + "_" + now
+
+      // launch a vcard with wiki info
+      fetch(bus.$emit('add-card', layerID))
+        .then((resp) => {
+          var div = document.getElementById("plot_" + layerID);
+          //div.innerHTML = "<iframe src='https://github.com/openearth/sandmotor-viewer/wiki/Aeolian' width='600' height='300' style='border:none;'></iframe>"; // add iFrame
+          div.innerHTML = "some text here about " + layerName
+        })
+    },
+
     toggleLayers() {
       if (_.isNil(this.map)) {
         return;
