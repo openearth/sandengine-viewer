@@ -40,9 +40,9 @@ export default {
       // launch a vcard with wiki info
       fetch(bus.$emit('add-card', layerID))
         .then((resp) => {
-          var div = document.getElementById("plot_" + layerID);
+          //document.getElementById("plot_" + layerID).innerHTML = '<object type="text/plain" data="http://raw.githubusercontent.com/wiki/openearth/sandmotor-viewer/Aeolian.md" style="width:100%; height:100%;"></object>';
           //div.innerHTML = "<iframe src='https://github.com/openearth/sandmotor-viewer/wiki/Aeolian' width='600' height='300' style='border:none;'></iframe>"; // add iFrame
-          div.innerHTML = "some text here about " + layerName
+            div.innerHTML = "some text here about " + layerName  
         })
     },
 
