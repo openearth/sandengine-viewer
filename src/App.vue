@@ -14,18 +14,31 @@
     <layer-control :layers="layers" :map="map"></layer-control>
 
   </v-navigation-drawer>
-  <v-toolbar light app clipped-left fixed>
+  <v-toolbar light app clipped fixed>
     <v-toolbar-title class="ml-0 pl-3">
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       Zandmotor data
     </v-toolbar-title>
+    <time-slider ref="timeslider" :show-play="false"></time-slider>
+
     <v-spacer></v-spacer>
-    <v-btn icon large>
-      <v-avatar size="32px" tile>
-        <!-- todo replace by company logo -->
-        <img src="http://www.dezandmotor.nl/assets/images/logo-de-zandmotor.png" alt="Logo">
+      <v-avatar width="64px">
+        <a class="btn btn--flat btn--router" icon large href='http://www.dezandmotor.nl/en/' target="parent">
+          <img src="src/assets/NatureCoastLogo.png" alt="Logo">
+        </a>
       </v-avatar>
-    </v-btn>
+    <v-avatar size="64px">
+        <a class="btn btn--flat btn--router" icon large href='http://www.stw.nl/en' target="parent">
+          <img src="src/assets/STWlogo.png" alt="Logo">
+        </a>
+    </v-avatar>
+    <v-avatar size="64px">
+        <a class="btn btn--flat btn--router" icon large href='https://github.com/openearth/sandmotor-viewer' target="parent">
+          <img src="src/assets/GitHub-Mark.png" alt="Logo">
+        </a>
+    </v-avatar>
+    <a href="mailto:Arjen.Luijendijk@deltares.nlSubject=Contact%20Zandmotor%20data" target="_top">contact</a>
+
   </v-toolbar>
   <v-content>
     <v-container fluid fill-height>
@@ -33,9 +46,9 @@
         <v-flex sm12 mb-2>
           <v-card id="map">
             <v-card-text>
-              <v-mapbox access-token="pk.eyJ1Ijoic2lnZ3lmIiwiYSI6Il8xOGdYdlEifQ.3-JZpqwUa3hydjAJFXIlMA" map-style="mapbox://styles/mapbox/satellite-streets-v10" :center="[4.186, 52.050]" :zoom="13.16" :pitch="5.00" :bearing="-0" :min-zoom="5" id="map" ref="map">
+              <v-mapbox access-token="pk.eyJ1Ijoic2lnZ3lmIiwiYSI6Il8xOGdYdlEifQ.3-JZpqwUa3hydjAJFXIlMA" map-style="mapbox://styles/mapbox/satellite-streets-v10" :center="[4.186, 52.060]" :zoom="12.5" :pitch="5.00" :bearing="-0" :min-zoom="5" id="map" ref="map">
                 <canvas id="windsock-canvas" width="200" height="200"></canvas>
-                <time-slider ref="timeslider" :show-play="false"></time-slider>
+
               </v-mapbox>
             </v-card-text>
           </v-card>
@@ -83,4 +96,9 @@
   top: 0;
   z-index: 5;
 }
+
+.bk-root {
+    z-index: 0;
+}
+
 </style>

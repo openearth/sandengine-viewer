@@ -6,8 +6,9 @@
         <v-switch v-model="layer.active"></v-switch>
       </v-list-tile-action>
       <v-list-tile-title>{{layer.name}}</v-list-tile-title>
-      <v-list-tile-action>
+      <v-list-tile-action style="display:-webkit-box">
         <v-icon>{{layer.icon}}</v-icon>
+        <v-btn small style="min-width:30px" v-on:click.native="addInfoCard(layer.id)"><v-icon>fa-question</v-icon></v-btn>
       </v-list-tile-action>
     </v-list-tile>
 

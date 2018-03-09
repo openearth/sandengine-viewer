@@ -10,7 +10,7 @@ function AddMorphology(map, layers) {
     "active": false,
     "visibility": "None",
     "icon": "grain",
-    "id": "morphology-layer",
+    "id": "Sediment",
     "type": "circle",
     "source": {
       "type": "geojson",
@@ -56,7 +56,7 @@ function filterMorphologyBy(timeExtent, map) {
     ['>=', 'time', tstart],
     ['<=', 'time', tend],
   ];
-  map.setFilter('morphology-layer', filters);
+  map.setFilter('Sediment', filters);
 }
 
 function ShowMorphologyData(data){

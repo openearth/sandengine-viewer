@@ -16,7 +16,6 @@ export default {
     let startDate = new Date(2012, 4, 3, 15, 5, 34);
     let endDate = new Date(2014, 11, 19, 12, 36, 4);
     let dates = [startDate, endDate];
-    console.log('startDate', startDate, 'endDate', endDate);
     let timeScale = d3.scaleTime()
         .domain(dates);
     return {
@@ -25,11 +24,7 @@ export default {
     };
   },
   mounted() {
-    console.log('this', this.$el);
-    console.log('this', this.images);
     this.draw();
-    console.log('this', this.imgElements);
-
   },
   computed: {
     canvas() {

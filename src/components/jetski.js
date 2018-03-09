@@ -53,6 +53,7 @@ function updateLayers(urls, map, layers) {
       "type": "group",
       "id": "Jetski",
       "range": "-12 7",
+      "z-order": 0,
       "css": "background: linear-gradient(to right, #000033,#000037,#00003a,#00003e, \
           #000042,#000045,#000049,#00004d,#000050,#000054,#000057,#00005b,#00005f,\
           #000062,#000066,#010268,#03036a,#04056c,#05076e,#070971,#080a73,#0a0c75,\

@@ -6,7 +6,7 @@ import $ from 'jquery';
 
 function AddAeolian(map, layers) {
   var layer_json = {
-    id: 'aeolian-layer',
+    id: 'Aeolian',
     active: true,
     visibility: "visible",
     name: 'Aeolian transport',
@@ -24,7 +24,7 @@ function AddAeolian(map, layers) {
         'base': 1.75,
         'stops': [
           [12, 2],
-          [22, 180]
+          [22, 80]
         ]
       },
       'circle-color': [
@@ -60,7 +60,7 @@ function filterAeolianBy(timeExtent, map) {
     ['>=', 'tStart', tstart],
     ['<=', 'tEnd', tend],
   ];
-  map.setFilter('aeolian-layer', filters);
+  map.setFilter('Aeolian', filters);
 }
 
 function ShowAeolianData(point, div_id) {
@@ -106,17 +106,16 @@ function bokehplot(locationID, deploymentName, timeseries, timeEnd, timeStart, p
   var data = timeseries[deploymentName];
   var keys = Object.keys(data);
 
-  var time = data[keys[0]];
-  var begin = 0;
-  var end = time.length;
+  // multiply by 1000 to convert to miliseconds
+  var x = data[keys[0]];
+  x = x.map(x => x*1000)
 
-  var x = []
-  _.each(time.slice(begin, end), function(event) {
-    x.push(new Date(event))
-  });
+  // get deployment timeStart and timeEnd
+  var deploymenttStart = moment.unix(parseFloat(x[0]/1000)).format('L')
+  var deploymenttEnd = moment.unix(parseFloat(x[x.length-1]/1000)).format('L')
 
   var plot = new plt.figure({
-    title: "Deployment: " + deploymentName + " Location: " + locationID + "\n Start deployment: " + timeStart + " End deployment: " + timeEnd,
+    title: "Deployment: " + deploymentName + " Location: " + locationID + " Start deployment: " + deploymenttStart + " End deployment: " + deploymenttEnd,
     tools: tools,
     width: 800,
     height: 350,
@@ -134,7 +133,7 @@ function bokehplot(locationID, deploymentName, timeseries, timeEnd, timeStart, p
   for (var i = 0; i < heights.length; i++) {
     var height = 'height ' + locationIDdata[heights[i]]['height'].toString() + ' m';
     var y = data[locationID][heights[i]]['particle_counts'];
-    y = y.slice(begin, end);
+    //y = y.slice(begin, end);
 
     // remove 0 values
     function filterFunction(value, index, array) {

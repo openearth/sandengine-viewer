@@ -1,4 +1,9 @@
 import _ from 'lodash';
+import moment from 'moment';
+import {
+  bus
+} from '@/event-bus.js';
+var Remarkable = require('remarkable');
 
 export default {
   name: 'layer-control',
@@ -12,7 +17,9 @@ export default {
     }
   },
   data() {
-    return {};
+    return {
+      btnInfo: null
+    };
   },
   mounted() {},
   watch: {
@@ -23,9 +30,33 @@ export default {
         this.toggleLayers();
       },
       deep: true
-    }
+    },
   },
   methods: {
+    addInfoCard(layerName) {
+
+      // make unique ID
+      var now = moment(new Date()).unix()
+      var layerID = layerName + "_" + now
+
+      var md = new Remarkable();
+      // launch a vcard with wiki info
+      fetch(bus.$emit('add-card', layerID))
+        .then((resp) => {
+          var div = document.getElementById("plot_" + layerID)
+          div.style.width = "500px"
+          div.style.heigth = "300px"
+          console.log(div)
+          fetch('http://raw.githubusercontent.com/wiki/openearth/sandmotor-viewer/' + layerName + '.md', {
+              mode: 'cors'
+            })
+            .then(data => data.text())
+            .then(data => {
+              div.innerHTML = md.render(data)
+            })
+        })
+    },
+
     toggleLayers() {
       if (_.isNil(this.map)) {
         return;
