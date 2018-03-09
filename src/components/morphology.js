@@ -47,6 +47,18 @@ function AddMorphology(map, layers) {
     bus.$emit('add-legend', 'test');
 }
 
+function filterMorphologyBy(timeExtent, map) {
+  //timeExtent provides 2 moments
+  var tstart = timeExtent[0].unix();
+  var tend = timeExtent[1].unix();
+  var filters = [
+    "all",
+    ['>=', 'time', tstart],
+    ['<=', 'time', tend],
+  ];
+  map.setFilter('Sediment', filters);
+}
+
 function ShowMorphologyData(data){
   bokehplot(data, ddocument.getElementById("properties.id"))
 }
@@ -100,5 +112,5 @@ function bokehplot(data, div, meteodata) {
 }
 
 export {
-  AddMorphology, ShowMorphologyData
+    AddMorphology, filterMorphologyBy, ShowMorphologyData
 }

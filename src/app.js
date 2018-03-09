@@ -41,7 +41,8 @@ import {
   ShowMeteoData
 } from './components/meteo.js'
 import {
-  AddMorphology
+  AddMorphology,
+  filterMorphologyBy
 } from './components/morphology.js'
 
 var draw = new MapboxDraw({
@@ -107,9 +108,10 @@ export default {
       if (activeLayers.indexOf("Aeolian") > -1) {
         filterAeolianBy(this.timeExtent, this.$refs.map.map);
       }
-      //if (activeLayers.indexOf("adcp-layer") > -1) {
-      //  filterADCPBy(this.timeExtent,this.$refs.map.map);
-      //}
+      if (activeLayers.indexOf("Sediment") > -1) {
+        console.log('check')
+        filterMorphologyBy(this.timeExtent,this.$refs.map.map);
+      }
       if (activeLayers.indexOf("Jetski") > -1) {
         updateJetski(this.$refs.map.map, this.layers, this.timeExtent[0], this.timeExtent[1]);
       }
