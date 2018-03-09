@@ -3,6 +3,7 @@ import moment from 'moment';
 import {
   bus
 } from '@/event-bus.js';
+var Remarkable = require('remarkable');
 
 export default {
   name: 'layer-control',
@@ -33,16 +34,26 @@ export default {
   },
   methods: {
     addInfoCard(layerName) {
+
       // make unique ID
       var now = moment(new Date()).unix()
       var layerID = layerName + "_" + now
 
+      var md = new Remarkable();
       // launch a vcard with wiki info
       fetch(bus.$emit('add-card', layerID))
         .then((resp) => {
-          //document.getElementById("plot_" + layerID).innerHTML = '<object type="text/plain" data="http://raw.githubusercontent.com/wiki/openearth/sandmotor-viewer/Aeolian.md" style="width:100%; height:100%;"></object>';
-          //div.innerHTML = "<iframe src='https://github.com/openearth/sandmotor-viewer/wiki/Aeolian' width='600' height='300' style='border:none;'></iframe>"; // add iFrame
-            div.innerHTML = "some text here about " + layerName  
+          var div = document.getElementById("plot_" + layerID)
+          div.style.width = "500px"
+          div.style.heigth = "300px"
+          console.log(div)
+          fetch('http://raw.githubusercontent.com/wiki/openearth/sandmotor-viewer/' + layerName + '.md', {
+              mode: 'cors'
+            })
+            .then(data => data.text())
+            .then(data => {
+              div.innerHTML = md.render(data)
+            })
         })
     },
 

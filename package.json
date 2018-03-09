@@ -26,6 +26,7 @@
     "mapbox-gl": "^0.42.2",
     "material-design-icons": "^3.0.1",
     "moment": "^2.20.1",
+    "remarkable": "^1.7.1",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "vue2mapbox-gl": "^0.3.1",

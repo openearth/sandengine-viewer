@@ -6,7 +6,7 @@ import $ from 'jquery';
 
 function AddAeolian(map, layers) {
   var layer_json = {
-    id: 'aeolian-layer',
+    id: 'Aeolian',
     active: true,
     visibility: "visible",
     name: 'Aeolian transport',
@@ -60,7 +60,7 @@ function filterAeolianBy(timeExtent, map) {
     ['>=', 'tStart', tstart],
     ['<=', 'tEnd', tend],
   ];
-  map.setFilter('aeolian-layer', filters);
+  map.setFilter('Aeolian', filters);
 }
 
 function ShowAeolianData(point, div_id) {

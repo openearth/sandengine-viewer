@@ -10,7 +10,7 @@ function AddMorphology(map, layers) {
     "active": false,
     "visibility": "None",
     "icon": "grain",
-    "id": "measurements",
+    "id": "Sediment",
     "type": "circle",
     "source": {
       "type": "geojson",

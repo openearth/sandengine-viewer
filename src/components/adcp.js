@@ -6,7 +6,7 @@ import $ from 'jquery';
 
 function AddADCP(map, layers) {
   var layer_json = {
-    id: 'adcp-layer',
+    id: 'ADCP',
     active: true,
     visibility: "visible",
     name: 'ADCP',
@@ -45,7 +45,7 @@ function filterADCPBy(timeExtent, map) {
     ['>=', 'tStart', tstart],
     ['<=', 'tEnd', tend],
   ];
-  //map.setFilter('adcp-layer', filters);
+  //map.setFilter('ADCP', filters);
 }
 
 function ShowADCPData(point, div_id) {

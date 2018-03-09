@@ -49,7 +49,7 @@ function addCanvas(jsondata, layers, map) {
     name: "Meteo",
     active: false,
     visibility: "none",
-    id: 'meteo-layer',
+    id: 'Meteo',
     type: 'raster',
     icon: 'filter_drama',
     css: "",

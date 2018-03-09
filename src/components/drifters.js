@@ -9,7 +9,7 @@ function AddDrifters(map, layers) {
     active: false,
     name: 'Drifters',
     icon: 'explore',
-    id: 'drifter-layer',
+    id: 'Drifters',
     visibility: "visible",
     type: 'line',
     source: {
@@ -42,7 +42,7 @@ function filterDrifterBy(timeExtent, map) {
       ['>=', 'tStart', tstart],
       ['<=', 'tEnd', tend],
     ];
-    map.setFilter('drifter-layer', filters);
+    map.setFilter('Drifters', filters);
 }
 
 export {AddDrifters, filterDrifterBy}
