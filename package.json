@@ -17,6 +17,7 @@
   "dependencies": {
     "@mapbox/geojsonhint": "^2.0.1",
     "@mapbox/mapbox-gl-draw": "^1.0.4",
+    "babel-polyfill": "^6.26.0",
     "bokehjs": "^0.12.10",
     "d3": "^4.11.0",
     "font-awesome": "^4.7.0",
