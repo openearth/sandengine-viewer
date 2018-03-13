@@ -3,7 +3,7 @@ import moment from 'moment';
 import {
   bus
 } from '@/event-bus.js';
-var Remarkable = require('remarkable');
+import Remarkable from 'remarkable';
 
 export default {
   name: 'layer-control',
