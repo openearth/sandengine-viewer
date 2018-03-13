@@ -24,17 +24,17 @@
     <v-spacer></v-spacer>
       <v-avatar width="64px">
         <a class="btn btn--flat btn--router" icon large href='http://www.dezandmotor.nl/en/' target="parent">
-          <img src="src/assets/NatureCoastLogo.png" alt="Logo">
+          <img src="static/images/NatureCoastLogo.png" alt="Logo">
         </a>
       </v-avatar>
     <v-avatar size="64px">
         <a class="btn btn--flat btn--router" icon large href='http://www.stw.nl/en' target="parent">
-          <img src="src/assets/STWlogo.png" alt="Logo">
+          <img src="static/images/STWlogo.png" alt="Logo">
         </a>
     </v-avatar>
     <v-avatar size="64px">
         <a class="btn btn--flat btn--router" icon large href='https://github.com/openearth/sandmotor-viewer' target="parent">
-          <img src="src/assets/GitHub-Mark.png" alt="Logo">
+          <img src="static/images/GitHub-Mark.png" alt="Logo">
         </a>
     </v-avatar>
     <a href="mailto:Arjen.Luijendijk@deltares.nlSubject=Contact%20Zandmotor%20data" target="_top">contact</a>
