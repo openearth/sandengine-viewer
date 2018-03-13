@@ -6,6 +6,9 @@ import Vuetify from 'vuetify';
 import App from './App.vue';
 import Vue2MapboxGL from 'vue2mapbox-gl';
 
+// For IE compatability
+import 'babel-polyfill';
+
 Vue.use(Vue2MapboxGL);
 Vue.use(Vuetify);
 
