@@ -193,9 +193,9 @@ export default {
         var features = this.map.queryRenderedFeatures(e.point);
         _.each(features, (point) => {
           if (point.layer.id == "Sediment") {
-            var div_id = point.properties.id
-            this.plots.push(div_id)
-            bus.$emit('click-plots', this.plots);
+            // var div_id = point.properties.id
+            //this.plots.push(div_id)
+            //bus.$emit('click-plots', this.plots);
             // ShowMorphologyData(point.properties, "plot_" + div_id)
           } else if (point.layer.id == "Aeolian") {
             var div_id = "Particle_" + point.properties.deploymentName + "_" + point.properties.location_ID

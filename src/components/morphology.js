@@ -59,12 +59,12 @@ function filterMorphologyBy(timeExtent, map) {
   map.setFilter('Sediment', filters);
 }
 
-function ShowMorphologyData(data){
-  bokehplot(data, ddocument.getElementById("properties.id"))
-}
+// function ShowMorphologyData(data){
+//    bokehplot(data, ddocument.getElementById("properties.id"))
+//  }
 
-function bokehplot(data, div, meteodata) {
-  var plt = Bokeh.Plotting;
+//function bokehplot(data, div, meteodata) {
+//  var plt = Bokeh.Plotting;
   // var tools = "pan,crosshair,wheel_zoom,box_zoom,reset,save";
   // var begin = 500000
   // var end = 750000
@@ -86,14 +86,14 @@ function bokehplot(data, div, meteodata) {
   //     y: y
   //   }
   // });
-  var plot = new plt.figure({
-    // title: meteodata[data].title,
-    tools: tools,
-    width: 400,
-    height: 200,
-    x_axis_type: 'datetime',
-    background_fill_color: "#F2F2F7"
-  });
+//  var plot = new plt.figure({
+//    // title: meteodata[data].title,
+//    tools: tools,
+//    width: 400,
+//    height: 200,
+//    x_axis_type: 'datetime',
+//    background_fill_color: "#F2F2F7"
+//  });
   // var line = new Bokeh.Line({
   //   x: {
   //     field: "x"
@@ -106,11 +106,11 @@ function bokehplot(data, div, meteodata) {
   // });
   //
   // plot.add_glyph(line, source);
-  var doc = new Bokeh.Document();
-  doc.add_root(plot);
-  Bokeh.embed.add_document_standalone(doc, div);
-}
+//  var doc = new Bokeh.Document();
+//  doc.add_root(plot);
+//  Bokeh.embed.add_document_standalone(doc, div);
+//}
 
 export {
-    AddMorphology, filterMorphologyBy, ShowMorphologyData
+    AddMorphology, filterMorphologyBy //, ShowMorphologyData
 }
