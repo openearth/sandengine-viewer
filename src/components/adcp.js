@@ -12,10 +12,10 @@ function AddADCP(map, layers) {
     name: 'ADCP',
     type: 'circle',
     icon: 'grain',
-    'icon-image': '/static/adcp.png',
+    'icon-image': 'static/adcp.png',
     source: {
       type: 'geojson',
-      data: '/static/adcp_locations.geojson'
+      data: 'static/adcp_locations.geojson'
     },
     "info": "Measurment from an Acoustic Doppler Current Profilers (ADCP) located at the Sand Motor. <a href='https://data.4tu.nl/repository/uuid:3bc3591b-9d9e-4600-8705-5b7eba6aa3ed'>Data link</a>",
     paint: {

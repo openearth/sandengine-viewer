@@ -15,7 +15,7 @@ function AddAeolian(map, layers) {
     icon: 'grain',
     source: {
       type: 'geojson',
-      data: '/static/aeolian_data.geojson'
+      data: 'static/aeolian_data.geojson'
     },
       "info": "Processed data on aeolian sediment transport from the 6-week MegaPeX field campaign at the Sand Motor mega nourishment. <a href='https://data.4tu.nl/repository/uuid:3bc3591b-9d9e-4600-8705-5b7eba6aa3ed'>Data link</a>",
     paint: {
