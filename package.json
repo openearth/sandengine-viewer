@@ -12,9 +12,8 @@
     "test": "npm run unit && npm run e2e",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
     "build": "node build/build.js",
-    "deploy": "gh-pages -d dist",
-    "deploy:surge": "surge -p dist zandmotor-viewer.surge.sh"
-  },
+    "deploy": "gh-pages -d dist"
+    },
   "dependencies": {
     "@mapbox/geojsonhint": "^2.0.1",
     "@mapbox/mapbox-gl-draw": "^1.0.4",
