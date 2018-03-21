@@ -6,17 +6,15 @@ import { getTileUrl } from '../lib/gee.js'
 
 import moment from 'moment';
 
-
-
-function filterJetskiBy(timeExtent, map) {
-  console.log('filtering jetski by', timeExtent)
-}
-
-
-
-
-
 export default {
+  props: {
+    timeExtent: {
+      type: Array,
+      default: function() {
+        return []
+      }
+    }
+  },
   data () {
     return {
       map: null,
@@ -24,6 +22,11 @@ export default {
     }
   },
   mounted () {
+  },
+  watch: {
+    timeExtent () {
+      console.log('filter by', this.timeExtent)
+    }
   },
   methods: {
     fetchImageUrls() {
