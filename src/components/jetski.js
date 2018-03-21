@@ -16,10 +16,10 @@ function updateJetski(map, layers, begin_date="2010-01-01", end_date="2018-01-01
     "interval": diff,
     "unit": "day"
   }
-  get_images_urls(json_data, map, layers)
+  getImagesUrls(json_data, map, layers)
 }
 
-function get_images_urls(json_data, map, layers) {
+function getImagesUrls(json_data, map, layers) {
   var SERVER_URL = 'http://hydro-engine.appspot.com'
   // var SERVER_URL = 'http://localhost:8080'
   var image_urls = fetch(SERVER_URL + '/get_image_urls', {
@@ -40,6 +40,10 @@ function get_images_urls(json_data, map, layers) {
       return image_data
     })
   return image_urls
+}
+
+function filterJetskiBy(timeExtent, map) {
+  console.log('filtering jetski by', timeExtent)
 }
 
 function updateLayers(urls, map, layers) {
@@ -111,5 +115,6 @@ function getTileUrl(mapId, token) {
 }
 
 export {
+  filterJetskiBy,
   updateJetski
 }

@@ -48,7 +48,7 @@
             <v-card-text>
               <v-mapbox access-token="pk.eyJ1Ijoic2lnZ3lmIiwiYSI6Il8xOGdYdlEifQ.3-JZpqwUa3hydjAJFXIlMA" map-style="mapbox://styles/mapbox/satellite-streets-v10" :center="[4.186, 52.060]" :zoom="12.5" :pitch="5.00" :bearing="-0" :min-zoom="5" id="map" ref="map">
                 <canvas id="windsock-canvas" width="200" height="200"></canvas>
-
+                <jetski-layer></jetski-layer>
               </v-mapbox>
             </v-card-text>
           </v-card>

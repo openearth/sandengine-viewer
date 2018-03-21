@@ -11,14 +11,12 @@ import moment from 'moment';
 import LayerControl from './components/LayerControl';
 import MorphologyCanvas from './components/MorphologyCanvas';
 import TimeSlider from './components/TimeSlider';
+import JetskiLayer from './components/JetskiLayer';
 import {
   DrawControls,
   addBathymetryPlot
 } from './components/map-draw.js';
 
-import {
-  updateJetski
-} from './components/jetski.js'
 import {
   AddLidar
 } from './components/lidar.js'
@@ -113,7 +111,7 @@ export default {
         filterMorphologyBy(this.timeExtent,this.$refs.map.map);
       }
       if (activeLayers.indexOf("Jetski") > -1) {
-        updateJetski(this.$refs.map.map, this.layers, this.timeExtent[0], this.timeExtent[1]);
+        filterJetskiBy(this.timeExtent, this.$refs.map.map);
       }
       DrawControls(this.$refs.map.map, this.draws, this.timeExtent[0], this.timeExtent[1], 'bathymetry_jetski')
 
@@ -143,7 +141,6 @@ export default {
       // AddJetski(this.$refs.map.map, this.layers)
       AddLidar(this.$refs.map.map, this.layers);
       AddADCP(this.$refs.map.map, this.layers);
-      updateJetski(this.$refs.map.map, this.layers);
       // TODO: Click event toevoegen
       this.map.on('mousemove', (e) => {
         this.$refs.map.map.getCanvas().style.cursor = '';
@@ -226,6 +223,7 @@ export default {
   },
   components: {
     'layer-control': LayerControl,
-    'time-slider': TimeSlider
+    'time-slider': TimeSlider,
+    'jetski-layer': JetskiLayer
   }
 };
