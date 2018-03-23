@@ -31,15 +31,17 @@ export default {
   methods: {
     fetchImageUrls() {
       const SERVER_URL = 'http://hydro-engine.appspot.com'
+      // const SERVER_URL = 'http://136.231.9.161:8080'
       const beginDate = moment("2010-01-01")
       const endDate = moment("2018-01-01")
       const diff = endDate.diff(beginDate, 'day')
+      const n = 15
       const requestBody = {
         dataset: "bathymetry_jetski",
         begin_date: beginDate,
         end_date: endDate,
-        step: diff,
-        interval: diff,
+        step: diff/n,
+        interval: diff/n,
         unit: "day"
       }
       const request = {
@@ -87,20 +89,21 @@ export default {
           css: css,
           info: info
       }
-      _.each(urls, (url) => {
-        var mapid = url.mapid
-        var token = url.token
-        let mapUrl = getTileUrl(mapid, token);
+      _.each(urls, (source) => {
         let subLayer = {
-          id: mapid,
+          id: source.mapid,
           name: "jetski",
           type: "raster",
+          properties: {
+            beginDate: moment(source.begin.value),
+            endDate: moment(source.end.value)
+          },
           layout: {
             visibility: "none"
           },
           source: {
             type: "raster",
-            tiles: [mapUrl],
+            tiles: [source.url],
             tileSize: 256
           }
         };
