@@ -1,4 +1,6 @@
 import Vue from 'vue';
+import draggable from 'vuedraggable'
+
 import {
   bus
 } from '@/event-bus.js';
@@ -7,7 +9,7 @@ import * as MapboxDraw from '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.js';
 import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css';
 import moment from 'moment';
 
-
+import VWelcome from './components/VWelcome'
 import LayerControl from './components/LayerControl';
 import MorphologyCanvas from './components/MorphologyCanvas';
 import TimeSlider from './components/TimeSlider';
@@ -59,7 +61,7 @@ export default {
   data: function() {
     return {
       map: null,
-      drawer: false,
+      drawer: true,
       fixed: false,
       showSettings: false,
       items: [{
@@ -226,6 +228,7 @@ export default {
   },
   components: {
     'layer-control': LayerControl,
-    'time-slider': TimeSlider
+    'time-slider': TimeSlider,
+    'v-welcome': VWelcome
   }
 };

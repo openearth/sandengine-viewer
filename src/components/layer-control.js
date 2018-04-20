@@ -1,5 +1,7 @@
 import _ from 'lodash';
 import moment from 'moment';
+import draggable from 'vuedraggable'
+
 import {
   bus
 } from '@/event-bus.js';
@@ -28,11 +30,37 @@ export default {
     layers: {
       handler: function(layers) {
         this.toggleLayers();
+        this.sortLayers()
+
       },
       deep: true
     },
   },
+  computed: {
+    computedList: {
+      get() {
+        return this.layers
+      },
+      set(layers) {
+        bus.$emit('select-layers', layers)
+      }
+    }
+  },
   methods: {
+    sortLayers() {
+      for (var i = this.layers.length - 2; i >= 0; --i) {
+        console.log(this.layers[i])
+        if (this.layers[i].data !== undefined) {
+          for (var thislayer = 0; thislayer < this.layers[i].data.length; ++thislayer) {
+
+            this.map.moveLayer(this.layers[i].data[thislayer].id)
+          }
+        } else {
+          this.map.moveLayer(this.layers[i].id)
+        }
+      }
+    },
+
     addInfoCard(layerName) {
 
       // make unique ID
@@ -77,5 +105,8 @@ export default {
         }
       });
     }
-  }
+  },
+  components: {
+  draggable
+}
 };
