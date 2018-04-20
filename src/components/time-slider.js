@@ -19,7 +19,7 @@ export default {
       type: Array,
       default () {
         let now = moment()
-        let then = moment("20110301", "YYYYMMDD")
+        let then = moment().subtract(7, 'years')
         return [then, now]
       }
     }
@@ -45,11 +45,13 @@ export default {
   mounted() {
     Vue.nextTick(() => {
       let input = this.$el.querySelector("input.slider");
+      console.log('max', this.initialMax)
       $(input).ionRangeSlider({
         type: "double",
         drag_interval: true,
         min: 0,
         max: 1,
+        to: this.initialTo,
         // not sure how to avoid steps, now use 1000 steps
         step: 0.001,
         grid: false,
@@ -76,6 +78,12 @@ export default {
         from: 0,
         to: 1
       });
+    },
+    startDate(val) {
+      this.slider.update()
+    },
+    endDate(val) {
+      this.slider.update()
     }
 
   },
@@ -130,30 +138,40 @@ export default {
       // remember current time
       this.last = now;
     },
-    dateByFraction (fraction) {
+    fractionToDate (fraction) {
       // miliseconds diff
-      const start = moment(this.startDate)
-      const end = moment(this.endDate)
+      // http://momentjs.com/guides/#/warnings/js-date/
+      const start = moment(this.startDate, DAY_FORMAT)
+      const end = moment(this.endDate, DAY_FORMAT)
       // positive number of miliseconds
       const diff = end.diff(start)
       const time = start.clone().add(diff * fraction, 'ms')
       return time
     },
     dateFormat (fraction) {
-      return this.dateByFraction(fraction).format(DAY_FORMAT)
+      return this.fractionToDate(fraction).format(DAY_FORMAT)
     },
     deferredMountedTo(map) {
       // Used when nested in a Leaflet or Mapbox
+    },
+    dateToFraction (date) {
+      const start = moment(this.startDate, DAY_FORMAT)
+      const end = moment(this.endDate, DAY_FORMAT)
+      // positive number of miliseconds
+      const totalDiff = end.diff(start)
+      const dateDiff = date.diff(start)
+      return dateDiff / totalDiff
     }
+
   },
   computed: {
     currentTime() {
-      return this.dateByFraction(this.slider.result.to);
+      return this.fractionToDate(this.slider.result.to);
     },
     currentExtent() {
       return [
-        this.dateByFraction(this.slider.result.from),
-        this.dateByFraction(this.slider.result.to)
+        this.fractionToDate(this.slider.result.from),
+        this.fractionToDate(this.slider.result.to)
       ];
     },
     allowedDates() {
@@ -162,6 +180,10 @@ export default {
         min: this.extent[0].format(DAY_FORMAT),
         max: this.extent[1].format(DAY_FORMAT)
       }
+    },
+    initialTo () {
+      const startPlusOneYear = moment(this.startDate).add(1, 'years')
+      return this.dateToFraction(moment.min(moment(this.endDate), startPlusOneYear))
     }
   }
 }
