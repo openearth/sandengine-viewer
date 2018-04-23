@@ -12,8 +12,8 @@
       </v-list>
     </v-toolbar>
     <layer-control :layers="layers" :map="map"></layer-control>
-
   </v-navigation-drawer>
+
   <v-toolbar light app clipped fixed>
     <v-toolbar-title class="ml-0 pl-3">
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>

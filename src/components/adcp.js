@@ -17,7 +17,7 @@ function AddADCP(map, layers) {
       type: 'geojson',
       data: 'static/adcp_locations.geojson'
     },
-    "info": "Measurment from an Acoustic Doppler Current Profilers (ADCP) located at the Sand Motor. <a href='https://data.4tu.nl/repository/uuid:3bc3591b-9d9e-4600-8705-5b7eba6aa3ed'>Data link</a>",
+    "info": "Measurment from an Acoustic Doppler Current Profilers (ADCP) located at the Sand Motor. <a href='https://data.4tu.nl/repository/uuid:3bc3591b-9d9e-4600-8705-5b7eba6aa3ed' target='parent'>Data link</a>",
     paint: {
       'circle-radius': {
         'base': 1.2,
@@ -48,7 +48,7 @@ function filterADCPBy(timeExtent, map) {
   //map.setFilter('ADCP', filters);
 }
 
-function ShowADCPData(point, div_id) {
+function ShowADCPData(point, div_id, timeExtent) {
   // find out which adcp was clicked
   var adcpID = point.properties.ADCPID;
   var url = "https://s3-eu-west-1.amazonaws.com/deltares-opendata/zandmotor/adcp/"
@@ -57,15 +57,15 @@ function ShowADCPData(point, div_id) {
       return resp.json();
     })
     .then((timeseries) => {
-      bokehplot('velocity', adcpID, timeseries, point, div_id[0]);
-      bokehplot('waterdepth', adcpID, timeseries, point, div_id[1]);
+      bokehplot('velocity', adcpID, timeseries, point, div_id[0], timeExtent);
+      bokehplot('waterdepth', adcpID, timeseries, point, div_id[1], timeExtent);
     })
     .catch((reason) => {
       console.warn(reason)
     })
 }
 
-function bokehplot(mode,adcpID,timeseries, point, div_id) {
+function bokehplot(mode,adcpID,timeseries, point, div_id, timeExtent) {
 
   // Check if timeseries is set
   if (timeseries == null) {
@@ -126,9 +126,17 @@ function bokehplot(mode,adcpID,timeseries, point, div_id) {
   }
 
   plot._legend.location = 'top_left';
+
   var doc = new Bokeh.Document();
   doc.add_root(plot);
   Bokeh.embed.add_document_standalone(doc, div);
+
+  // filter time
+  var plotID = plot.attributes.id
+  var tstart = timeExtent[0].unix() * 1000;
+  var tend = timeExtent[1].unix() * 1000;
+  Bokeh.index[plotID].model.x_range.start = tstart
+  Bokeh.index[plotID].model.x_range.end = tend
 }
 
 export {
