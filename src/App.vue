@@ -3,6 +3,12 @@
   <!-- TODO: temporary off and fix that the drawer collapses again -->
   <v-navigation-drawer fixed app v-model="drawer">
     <v-toolbar flat>
+      <v-flex xs2 offset-xs5>
+        <v-tooltip bottom>
+          <v-progress-circular slot="activator" v-if="layers.length < 7" indeterminate ></v-progress-circular>
+          <span>Loading layers</span>
+        </v-tooltip>
+      </v-flex>
       <v-list>
         <v-list-tile>
           <v-list-tile-title class="title">
@@ -11,6 +17,7 @@
         </v-list-tile>
       </v-list>
     </v-toolbar>
+
     <layer-control :layers="layers" :map="map"></layer-control>
   </v-navigation-drawer>
 
@@ -39,6 +46,13 @@
     </v-avatar>
     <a href="mailto:Arjen.Luijendijk@deltares.nlSubject=Contact%20Zandmotor%20data" target="_top">contact</a>
 
+    <v-tooltip bottom>
+      <v-btn slot="activator" small style="min-width:30px" v-on:click="dialog=true">
+        <v-icon>fa-question</v-icon>
+      </v-btn>
+      <span>Open the tutorial</span>
+    </v-tooltip>
+
   </v-toolbar>
   <v-content>
     <v-container fluid fill-height>
@@ -48,7 +62,6 @@
             <v-card-text>
               <v-mapbox access-token="pk.eyJ1Ijoic2lnZ3lmIiwiYSI6Il8xOGdYdlEifQ.3-JZpqwUa3hydjAJFXIlMA" map-style="mapbox://styles/mapbox/satellite-streets-v10" :center="[4.186, 52.060]" :zoom="12.5" :pitch="5.00" :bearing="-0" :min-zoom="5" id="map" ref="map">
                 <canvas id="windsock-canvas" width="200" height="200"></canvas>
-
               </v-mapbox>
             </v-card-text>
           </v-card>
@@ -67,7 +80,7 @@
       </v-layout>
     </v-container>
   </v-content>
-  <v-welcome></v-welcome>
+  <v-welcome v-if="dialog" dialog="dialog"></v-welcome>
 </v-app>
 </template>
 <script src="./app.js"></script>
