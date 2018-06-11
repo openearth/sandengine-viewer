@@ -73,10 +73,23 @@ export default {
       msg: "",
       timeExtent: [moment("20110301", "YYYYMMDD"), moment()],
       plots: [],
-      draws: []
+      draws: [],
+      dialog: true
     };
   },
+  watch: {
+    dialog: {
+      handler: function (dialog) {
+        this.dialog = dialog
+      },
+      deep: true
+    }
+  },
+
   mounted() {
+    bus.$on('change-dialog', (dialog) => {
+      this.dialog = dialog
+    })
     bus.$on('select-layers', (layers) => {
       Vue.set(this, 'layers', layers);
     });
@@ -93,6 +106,7 @@ export default {
     bus.$on('map-loaded', (event) => {
       Vue.set(this, 'map', event.target);
     });
+
 
     this.$refs.timeslider.$on('time-extent-update', (event) => {
       this.timeExtent = event;

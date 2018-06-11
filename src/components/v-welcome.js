@@ -1,3 +1,7 @@
+import {
+  bus
+} from '@/event-bus.js';
+
 export default {
   data() {
     return {
@@ -5,6 +9,16 @@ export default {
       dialog: true,
     }
   },
+  watch: {
+   dialog: {
+     handler: function (dialog) {
+       this.dialog = dialog
+       bus.$emit('change-dialog', dialog)
+     },
+     deep: true
+   }
+ },
+
   methods: {
     openTutorial() {
       document.getElementById("welcome").style.display = "none";
