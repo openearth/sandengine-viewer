@@ -11,13 +11,12 @@ function AddAeolian(map, layers) {
     visibility: "visible",
     name: 'Aeolian transport',
     type: 'circle',
-    cursor: 'pointer',
     icon: 'grain',
     source: {
       type: 'geojson',
       data: 'static/aeolian_data.geojson'
     },
-      "info": "Processed data on aeolian sediment transport from the 6-week MegaPeX field campaign at the Sand Motor mega nourishment. <a href='https://data.4tu.nl/repository/uuid:3bc3591b-9d9e-4600-8705-5b7eba6aa3ed'>Data link</a>",
+      "info": "Processed data on aeolian sediment transport from the 6-week MegaPeX field campaign at the Sand Motor mega nourishment. <a href='https://data.4tu.nl/repository/uuid:3bc3591b-9d9e-4600-8705-5b7eba6aa3ed'  target='parent'>Data link</a>",
     paint: {
       // make circles larger as the user zooms from z12 to z22
       'circle-radius': {

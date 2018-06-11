@@ -146,12 +146,22 @@ export default {
       AddLidar(this.$refs.map.map, this.layers);
       AddADCP(this.$refs.map.map, this.layers);
       updateJetski(this.$refs.map.map, this.layers);
+
       // TODO: Click event toevoegen
       this.map.on('mousemove', (e) => {
         this.$refs.map.map.getCanvas().style.cursor = '';
         var features = this.map.queryRenderedFeatures(e.point);
         if (typeof features[0] !== 'undefined') {
-          this.$refs.map.map.getCanvas().style.cursor = 'pointer';
+          // Define pointer based on clickable layer
+          if (features[0].layer.id == 'Sediment') {
+            this.$refs.map.map.getCanvas().style.cursor = '';
+          }
+          else if (features[0].layer.id == 'Drifters') {
+            this.$refs.map.map.getCanvas().style.cursor = '';
+          }
+          else {
+            this.$refs.map.map.getCanvas().style.cursor = 'pointer';
+          }
         }
       })
       this.$refs.map.map.on('draw.create', () => {
@@ -163,8 +173,6 @@ export default {
         bus.$emit('click-plots', this.plots);
         DrawControls(this.$refs.map.map, this.draws, this.timeExtent[0], this.timeExtent[1], 'bathymetry_jetski')
       })
-
-
 
       this.map.on('click', (e) => {
         var click_lon = e.lngLat.lng
@@ -212,12 +220,12 @@ export default {
               ids.push("plot_" + p)
               bus.$emit('click-plots', this.plots);
             })
-            ShowADCPData(point, ids)
+
+            ShowADCPData(point, ids, this.timeExtent)
           }
         })
       });
     })
-
   },
   methods: {
     removePlot(e) {
