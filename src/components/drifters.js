@@ -12,6 +12,7 @@ function AddDrifters(map, layers) {
     id: 'Drifters',
     visibility: "visible",
     type: 'line',
+    clickable: false,
     source: {
       type: 'geojson',
       data: 'https://s3-eu-west-1.amazonaws.com/deltares-opendata/zandmotor/drifters/drifters.geojson',

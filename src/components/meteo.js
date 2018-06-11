@@ -51,6 +51,7 @@ function addCanvas(jsondata, layers, map) {
     visibility: "none",
     id: 'Meteo',
     type: 'raster',
+    clickable: true,
     paint: {
       'circle-radius': {
         'base': 1.2,

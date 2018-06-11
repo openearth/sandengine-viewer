@@ -111,7 +111,6 @@ export default {
         filterAeolianBy(this.timeExtent, this.$refs.map.map);
       }
       if (activeLayers.indexOf("Sediment") > -1) {
-        console.log('check')
         filterMorphologyBy(this.timeExtent,this.$refs.map.map);
       }
       if (activeLayers.indexOf("Jetski") > -1) {
@@ -153,14 +152,11 @@ export default {
         var features = this.map.queryRenderedFeatures(e.point);
         if (typeof features[0] !== 'undefined') {
           // Define pointer based on clickable layer
-          if (features[0].layer.id == 'Sediment') {
-            this.$refs.map.map.getCanvas().style.cursor = '';
-          }
-          else if (features[0].layer.id == 'Drifters') {
-            this.$refs.map.map.getCanvas().style.cursor = '';
+          if (this.layers.find(item => item.id === features[0].layer.id).clickable) {
+            this.$refs.map.map.getCanvas().style.cursor = 'pointer';
           }
           else {
-            this.$refs.map.map.getCanvas().style.cursor = 'pointer';
+            this.$refs.map.map.getCanvas().style.cursor = '';
           }
         }
       })
@@ -196,8 +192,6 @@ export default {
             ShowMeteoData(ids)
           }
         }
-
-
 
         // When clicked on a feature of Morphology or aeolian
         var features = this.map.queryRenderedFeatures(e.point);

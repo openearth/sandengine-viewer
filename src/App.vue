@@ -67,6 +67,7 @@
       </v-layout>
     </v-container>
   </v-content>
+  <v-welcome></v-welcome>
 </v-app>
 </template>
 <script src="./app.js"></script>

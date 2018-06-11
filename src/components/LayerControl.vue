@@ -8,17 +8,27 @@
         </v-list-tile-action>
         <v-list-tile-title>{{layer.name}}</v-list-tile-title>
         <v-list-tile-action style="display:-webkit-box">
-          <v-icon>{{layer.icon}}</v-icon>
-          <v-btn small style="min-width:30px" v-on:click.native="addInfoCard(layer.id)">
-            <v-icon>fa-question</v-icon>
-          </v-btn>
+          <!-- <v-icon>{{layer.icon}}</v-icon> -->
+          <v-tooltip bottom  v-if="layer.clickable">
+            <v-icon slot="activator" >
+              fa-area-chart
+            </v-icon>
+            <span>This layer is clickable and a card with a graph will appear.</span>
+          </v-tooltip>
+          <v-tooltip bottom>
+            <v-btn slot="activator" small style="min-width:30px" v-on:click.native="addInfoCard(layer.id)">
+              <v-icon>fa-question</v-icon>
+            </v-btn>
+            <span>A card will appear with more information about this layer.</span>
+          </v-tooltip>
         </v-list-tile-action>
       </v-list-tile>
 
       <div class="bar-wrapper">
         <div :style="layer.css" class='bar' v-if="layer.css"></div>
         <div class='bartext'>{{layer.range}} <span class='barspan'> </span> </div>
-        <div class='information' v-html="layer.info">{{layer.info}} </div>
+        <div class='information' v-html="layer.info">{{layer.info}}
+        </div>
       </div>
   </v-list>
 </draggable>
@@ -28,7 +38,7 @@
 
 <script src="./layer-control.js"></script>
 
-<style scoped>
+<style>
 .bartext {
   text-align: justify;
   width: 100%;
@@ -42,7 +52,6 @@
 
 .barspan {
   width: 100%;
-
   display: inline-block;
 }
 
@@ -66,4 +75,9 @@
 .navigation-drawer .list {
   cursor: move;
 }
+
+.list.list--dense:hover {
+  background-color: lightgrey;
+}
+
 </style>

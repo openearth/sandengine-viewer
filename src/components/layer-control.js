@@ -49,10 +49,8 @@ export default {
   methods: {
     sortLayers() {
       for (var i = this.layers.length - 2; i >= 0; --i) {
-        console.log(this.layers[i])
         if (this.layers[i].data !== undefined) {
           for (var thislayer = 0; thislayer < this.layers[i].data.length; ++thislayer) {
-
             this.map.moveLayer(this.layers[i].data[thislayer].id)
           }
         } else {
@@ -62,7 +60,6 @@ export default {
     },
 
     addInfoCard(layerName) {
-
       // make unique ID
       var now = moment(new Date()).unix()
       var layerID = layerName + "_" + now
@@ -74,7 +71,6 @@ export default {
           var div = document.getElementById("plot_" + layerID)
           div.style.width = "500px"
           div.style.heigth = "300px"
-          console.log(div)
           fetch('http://raw.githubusercontent.com/wiki/openearth/sandmotor-viewer/' + layerName + '.md', {
               mode: 'cors'
             })
