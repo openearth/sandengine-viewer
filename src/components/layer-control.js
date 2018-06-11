@@ -1,5 +1,7 @@
 import _ from 'lodash';
 import moment from 'moment';
+import draggable from 'vuedraggable'
+
 import {
   bus
 } from '@/event-bus.js';
@@ -28,13 +30,36 @@ export default {
     layers: {
       handler: function(layers) {
         this.toggleLayers();
+        this.sortLayers()
+
       },
       deep: true
     },
   },
+  computed: {
+    computedList: {
+      get() {
+        return this.layers
+      },
+      set(layers) {
+        bus.$emit('select-layers', layers)
+      }
+    }
+  },
   methods: {
-    addInfoCard(layerName) {
+    sortLayers() {
+      for (var i = this.layers.length - 2; i >= 0; --i) {
+        if (this.layers[i].data !== undefined) {
+          for (var thislayer = 0; thislayer < this.layers[i].data.length; ++thislayer) {
+            this.map.moveLayer(this.layers[i].data[thislayer].id)
+          }
+        } else {
+          this.map.moveLayer(this.layers[i].id)
+        }
+      }
+    },
 
+    addInfoCard(layerName) {
       // make unique ID
       var now = moment(new Date()).unix()
       var layerID = layerName + "_" + now
@@ -46,7 +71,6 @@ export default {
           var div = document.getElementById("plot_" + layerID)
           div.style.width = "500px"
           div.style.heigth = "300px"
-          console.log(div)
           fetch('http://raw.githubusercontent.com/wiki/openearth/sandmotor-viewer/' + layerName + '.md', {
               mode: 'cors'
             })
@@ -77,5 +101,8 @@ export default {
         }
       });
     }
-  }
+  },
+  components: {
+  draggable
+}
 };

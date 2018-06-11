@@ -1,4 +1,6 @@
 import Vue from 'vue';
+import draggable from 'vuedraggable'
+
 import {
   bus
 } from '@/event-bus.js';
@@ -7,7 +9,7 @@ import * as MapboxDraw from '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.js';
 import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css';
 import moment from 'moment';
 
-
+import VWelcome from './components/VWelcome'
 import LayerControl from './components/LayerControl';
 import MorphologyCanvas from './components/MorphologyCanvas';
 import TimeSlider from './components/TimeSlider';
@@ -109,7 +111,6 @@ export default {
         filterAeolianBy(this.timeExtent, this.$refs.map.map);
       }
       if (activeLayers.indexOf("Sediment") > -1) {
-        console.log('check')
         filterMorphologyBy(this.timeExtent,this.$refs.map.map);
       }
       if (activeLayers.indexOf("Jetski") > -1) {
@@ -151,14 +152,11 @@ export default {
         var features = this.map.queryRenderedFeatures(e.point);
         if (typeof features[0] !== 'undefined') {
           // Define pointer based on clickable layer
-          if (features[0].layer.id == 'Sediment') {
-            this.$refs.map.map.getCanvas().style.cursor = '';
-          }
-          else if (features[0].layer.id == 'Drifters') {
-            this.$refs.map.map.getCanvas().style.cursor = '';
+          if (this.layers.find(item => item.id === features[0].layer.id).clickable) {
+            this.$refs.map.map.getCanvas().style.cursor = 'pointer';
           }
           else {
-            this.$refs.map.map.getCanvas().style.cursor = 'pointer';
+            this.$refs.map.map.getCanvas().style.cursor = '';
           }
         }
       })
@@ -194,8 +192,6 @@ export default {
             ShowMeteoData(ids)
           }
         }
-
-
 
         // When clicked on a feature of Morphology or aeolian
         var features = this.map.queryRenderedFeatures(e.point);
@@ -234,6 +230,7 @@ export default {
   },
   components: {
     'layer-control': LayerControl,
-    'time-slider': TimeSlider
+    'time-slider': TimeSlider,
+    'v-welcome': VWelcome
   }
 };

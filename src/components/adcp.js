@@ -12,6 +12,7 @@ function AddADCP(map, layers) {
     name: 'ADCP',
     type: 'circle',
     icon: 'grain',
+    clickable: true,
     'icon-image': 'static/adcp.png',
     source: {
       type: 'geojson',

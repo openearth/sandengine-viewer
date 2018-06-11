@@ -12,6 +12,7 @@ function AddAeolian(map, layers) {
     name: 'Aeolian transport',
     type: 'circle',
     icon: 'grain',
+    clickable: true,
     source: {
       type: 'geojson',
       data: 'static/aeolian_data.geojson'
