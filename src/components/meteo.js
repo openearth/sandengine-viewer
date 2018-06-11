@@ -51,6 +51,16 @@ function addCanvas(jsondata, layers, map) {
     visibility: "none",
     id: 'Meteo',
     type: 'raster',
+    paint: {
+      'circle-radius': {
+        'base': 1.2,
+        'stops': [
+          [12, 4],
+          [22, 180]
+        ]
+      },
+      'circle-color': 'FireBrick'
+    },
     icon: 'filter_drama',
     css: "",
     range: "",
@@ -65,7 +75,7 @@ function addCanvas(jsondata, layers, map) {
         [lon - del, lat - del]
       ]
     },
-      "info": "Meteo measurements at the Sand Motor. Air temperature, humidity, pressure, solar radiation, precipitation, wind speed and wind direction are measured. <a href='https://data.4tu.nl/repository/uuid:b7aac156-73d4-4b62-bad4-508c95de8331'>Data link</a>",
+      "info": "Meteo measurements at the Sand Motor. Air temperature, humidity, pressure, solar radiation, precipitation, wind speed and wind direction are measured. <a href='https://data.4tu.nl/repository/uuid:b7aac156-73d4-4b62-bad4-508c95de8331' target='parent'>Data link</a>",
     paint: {}
   };
   map.addLayer(layer_json);
