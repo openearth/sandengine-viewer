@@ -26,6 +26,7 @@
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       Zandmotor data
     </v-toolbar-title>
+
     <time-slider ref="timeslider" :show-play="false"></time-slider>
 
     <v-spacer></v-spacer>
@@ -66,6 +67,9 @@
             </v-card-text>
           </v-card>
         </v-flex>
+        <v-card-text v-if="plots.length < 1">
+          <p>Graphs will be presented here after clicking on a layer with the icon <v-icon>fa-area-chart</v-icon></p>
+        </v-card-text>
         <v-card :id="'card_'+ plot" v-for="plot in plots" :key="plot" class="mb-1 mr-1">
           <v-card-actions>
             <v-btn flat icon v-on:click="removePlot(plot, $event)">
