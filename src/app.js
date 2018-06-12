@@ -116,7 +116,7 @@ export default {
       if (activeLayers.indexOf("Jetski") > -1) {
         updateJetski(this.$refs.map.map, this.layers, this.timeExtent[0], this.timeExtent[1]);
       }
-      DrawControls(this.$refs.map.map, this.draws, this.timeExtent[0], this.timeExtent[1], 'bathymetry_jetski')
+      DrawControls(this.$refs.map.map, this.draws, this.timeExtent[0], this.timeExtent[1], ['bathymetry_jetski', 'bathymetry_lidar'])
 
       // filter all open Bokeh plots on TimeSlider
       var keys = Object.keys(Bokeh.index)
@@ -150,9 +150,10 @@ export default {
       this.map.on('mousemove', (e) => {
         this.$refs.map.map.getCanvas().style.cursor = '';
         var features = this.map.queryRenderedFeatures(e.point);
-        if (typeof features[0] !== 'undefined') {
+        if (features[0] !== undefined) {
+          var firstlayer = this.layers.find(item => item.id === features[0].layer.id)
           // Define pointer based on clickable layer
-          if (this.layers.find(item => item.id === features[0].layer.id).clickable) {
+          if (firstlayer !== undefined && firstlayer.clickable) {
             this.$refs.map.map.getCanvas().style.cursor = 'pointer';
           }
           else {
@@ -165,9 +166,10 @@ export default {
         var region = regions.features[regions.features.length - 1].geometry
         var div_id = JSON.stringify(region)
         this.draws.push(region)
-        this.plots.push(div_id)
+        this.plots.push(div_id + '_bathymetry_jetski')
+        this.plots.push(div_id + '_bathymetry_lidar')
         bus.$emit('click-plots', this.plots);
-        DrawControls(this.$refs.map.map, this.draws, this.timeExtent[0], this.timeExtent[1], 'bathymetry_jetski')
+        DrawControls(this.$refs.map.map, this.draws, this.timeExtent[0], this.timeExtent[1], ['bathymetry_jetski', 'bathymetry_lidar'])
       })
 
       this.map.on('click', (e) => {
