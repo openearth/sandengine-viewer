@@ -3,11 +3,13 @@ import {
 } from '@/event-bus.js';
 
 import moment from 'moment';
+var jetski = undefined
 
 function updateJetski(map, layers, begin_date="2010-01-01", end_date="2018-01-01") {
   var begin = moment(begin_date)
   var end = moment(end_date)
   var diff = end.diff(begin, 'day')
+
   var json_data = {
     "dataset": "bathymetry_jetski",
     "begin_date": begin,
@@ -30,19 +32,18 @@ function get_images_urls(json_data, map, layers) {
         'Content-Type': 'application/json'
       }
     })
-
     .then((res) => {
       return res.json();
     })
     .then((image_data) =>  {
-        updateLayers(image_data, map, layers)
+      updateLayers(image_data, map, layers)
       return image_data
     })
   return image_urls
 }
 
 function updateLayers(urls, map, layers) {
-  var jetski = layers.find(item => item.name === "Jetski")
+  jetski = layers.find(item => item.id === "Jetski")
   if (jetski === undefined) {
     var jetski = {
       "name": "Jetski [m, NAP]",
@@ -72,6 +73,7 @@ function updateLayers(urls, map, layers) {
          "info": "Zandmotor bathymetric and topographic survey, gridded on 20m grid. The most recent jetski data in the selected period is shown. No data is available after June 2017. <a href='https://data.4tu.nl/repository/uuid:c40da555-3eff-4c3c-89d6-136994a07120'  target='parent'>Data link</a>"
     }
     layers.push(jetski);
+    bus.$emit('select-layers', layers);
   }
   else {
     _.each(jetski.data, (old) =>{
@@ -79,7 +81,8 @@ function updateLayers(urls, map, layers) {
     })
     jetski.data = []
   }
-  _.each(urls, (url) => {
+  // _.each(urls, (url) => {
+  var url = urls[0]
     var mapid = url.mapid
     var token = url.token
     let mapUrl = getTileUrl(mapid, token);
@@ -87,8 +90,8 @@ function updateLayers(urls, map, layers) {
       id: mapid,
       name: "jetski",
       type: "raster",
-      layout: {
-        visibility: "none"
+      paint: {
+        "raster-opacity": 0.5
       },
       source: {
         type: "raster",
@@ -98,8 +101,7 @@ function updateLayers(urls, map, layers) {
     };
     map.addLayer(layer)
     jetski.data.push(layer)
-  });
-  bus.$emit('select-layers', layers);
+  // });
 }
 function getTileUrl(mapId, token) {
   let baseUrl = "https://earthengine.googleapis.com/map";

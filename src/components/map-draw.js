@@ -25,7 +25,13 @@ var colors = ['#ffffff', '#e6e6ff', '#ccccff', '#b3b3ff', '#9999ff', '#8080ff',
 var draws = []
 
 function DrawControls(map, draws, beginDate, endDate, dataset) {
-  var profile = download_raster_profile(draws, dataset, 20, beginDate, endDate)
+  _.each(dataset, (set) => {
+    if (set === "bathymetry_lidar") {
+      beginDate = moment("2001-01-01")
+      endDate = moment("2018-01-01")
+    }
+    var profile = download_raster_profile(draws, set, 20, beginDate, endDate)
+  })
 }
 
 
@@ -40,7 +46,6 @@ function download_raster_profile(regions, dataset, scale, begin_date, end_date) 
       "end_date": end_date,
       'scale': scale
     }
-    console.log(data)
     var myHeaders = new Headers();
     var profile = fetch(SERVER_URL + '/get_raster_profile', {
         method: "POST",
@@ -55,7 +60,7 @@ function download_raster_profile(regions, dataset, scale, begin_date, end_date) 
         return res.json();
       })
       .then((profile_data) => {
-        bokehplot(profile_data, data, JSON.stringify(region))
+        bokehplot(profile_data, data, JSON.stringify(region) + '_' + dataset)
         return profile_data
       })
     return profile
@@ -63,7 +68,6 @@ function download_raster_profile(regions, dataset, scale, begin_date, end_date) 
 };
 
 function bokehplot(profile_data, data, div_id) {
-  console.log(div_id)
   var div = document.getElementById("plot_" + div_id);
 
   // div.innerHTML = ""; // clear div
@@ -78,7 +82,6 @@ function bokehplot(profile_data, data, div_id) {
 
   if (Bokeh.index[div_id] != undefined) {
     var plot = Bokeh.index[div_id].model
-
     var color = colors[Bokeh.index[div_id].model._legend.attributes.items.length]
   } else {
     var plot = new plt.figure({
@@ -105,7 +108,6 @@ function bokehplot(profile_data, data, div_id) {
     line_width: 2,
     line_color: color
   });
-
   if (Bokeh.index[div_id] == undefined) {
     var doc = new Bokeh.Document();
     doc.add_root(plot);
