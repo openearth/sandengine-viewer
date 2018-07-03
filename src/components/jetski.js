@@ -6,17 +6,10 @@ import moment from 'moment';
 var jetski = undefined
 
 function updateJetski(map, layers, begin_date="2010-01-01", end_date="2018-01-01") {
-  var begin = moment(begin_date)
-  var end = moment(end_date)
-  var diff = end.diff(begin, 'day')
-
   var json_data = {
-    "dataset": "bathymetry_jetski",
-    "begin_date": begin,
-    "end_date": end,
-    "step": diff,
-    "interval": diff,
-    "unit": "day"
+    "dataset": "jetski",
+    "begin_date": begin_date,
+    "end_date": end_date
   }
   get_images_urls(json_data, map, layers)
 }
@@ -24,7 +17,7 @@ function updateJetski(map, layers, begin_date="2010-01-01", end_date="2018-01-01
 function get_images_urls(json_data, map, layers) {
   var SERVER_URL = 'http://hydro-engine.appspot.com'
   // var SERVER_URL = 'http://localhost:8080'
-  var image_urls = fetch(SERVER_URL + '/get_image_urls', {
+  var image_urls = fetch(SERVER_URL + '/get_bathymetry', {
       method: "POST",
       body: JSON.stringify(json_data),
       mode: 'cors',
@@ -42,7 +35,7 @@ function get_images_urls(json_data, map, layers) {
   return image_urls
 }
 
-function updateLayers(urls, map, layers) {
+function updateLayers(url, map, layers) {
   jetski = layers.find(item => item.id === "Jetski")
   if (jetski === undefined) {
     var jetski = {
@@ -81,27 +74,24 @@ function updateLayers(urls, map, layers) {
     })
     jetski.data = []
   }
-  // _.each(urls, (url) => {
-  var url = urls[0]
-    var mapid = url.mapid
-    var token = url.token
-    let mapUrl = getTileUrl(mapid, token);
-    let layer = {
-      id: mapid,
-      name: "jetski",
+  var mapid = url.mapid
+  var token = url.token
+  let mapUrl = getTileUrl(mapid, token);
+  let layer = {
+    id: mapid,
+    name: "jetski",
+    type: "raster",
+    paint: {
+      "raster-opacity": 0.7
+    },
+    source: {
       type: "raster",
-      paint: {
-        "raster-opacity": 0.5
-      },
-      source: {
-        type: "raster",
-        tiles: [mapUrl],
-        tileSize: 256
-      }
-    };
-    map.addLayer(layer)
-    jetski.data.push(layer)
-  // });
+      tiles: [mapUrl],
+      tileSize: 256
+    }
+  };
+  map.addLayer(layer)
+  jetski.data.push(layer)
 }
 function getTileUrl(mapId, token) {
   let baseUrl = "https://earthengine.googleapis.com/map";

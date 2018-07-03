@@ -80,4 +80,8 @@
   background-color: lightgrey;
 }
 
+.layer-control {
+  max-height: 100%;
+  overflow-y: scroll;
+}
 </style>

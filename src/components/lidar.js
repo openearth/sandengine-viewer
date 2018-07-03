@@ -5,18 +5,12 @@ import moment from 'moment';
 var lidar = undefined
 
 function AddLidar(map, layers) {
-  var begin_date="2001-01-01"
-  var end_date="2018-01-01"
-  var begin = moment(begin_date)
-  var end = moment(end_date)
-  var diff = end.diff(begin, 'day')
+  var begin_date ="2001-01-01"
+  var end_date ="2018-01-01"
   var json_data = {
-    "dataset": "bathymetry_lidar",
+    "dataset": "kustlidar",
     "begin_date": begin_date,
-    "end_date": end_date,
-    "step": diff,
-    "interval": diff,
-    "unit": "day"
+    "end_date": end_date
   }
   get_images_urls(json_data, map, layers)
 }
@@ -24,7 +18,7 @@ function AddLidar(map, layers) {
 function get_images_urls(json_data, map, layers) {
   var SERVER_URL = 'http://hydro-engine.appspot.com'
   // var SERVER_URL = 'http://localhost:8080'
-  var image_urls = fetch(SERVER_URL + '/get_image_urls', {
+  var image_urls = fetch(SERVER_URL + '/get_bathymetry', {
       method: "POST",
       body: JSON.stringify(json_data),
       mode: 'cors',
@@ -43,7 +37,7 @@ function get_images_urls(json_data, map, layers) {
   return image_urls
 }
 
-function AddLayers(urls, map, layers){
+function AddLayers(url, map, layers){
   lidar = layers.find(item => item.id === "Lidar")
   if (lidar === undefined) {
     var grouplayer = {
@@ -70,7 +64,7 @@ function AddLayers(urls, map, layers){
           #fdd164,#fecf65,#ffcc66,#fdc861,#fcc55d,#fbc158,#f9be53,#f7ba4f,#f6b64a,\
           #f5b346,#f3af41,#f1ac3c,#f0a838,#efa433,#eda12e,#eb9d2a,#ea9a25,#e99620,\
           #e7931c,#e58f17,#e48b13,#e3880e,#e18409,#df8105,#de7d00);",
-          "info": "Elevation measurements of the dutch coast done with LIDAR. <a href='https://data.4tu.nl/repository/uuid:8a8a91bc-e520-4d19-a127-5fd2232cc58e'  target='parent'>Data link</a>"
+          "info": "Elevation measurements of the dutch coast done with LIDAR. Single date (begin 2011). <a href='https://data.4tu.nl/repository/uuid:8a8a91bc-e520-4d19-a127-5fd2232cc58e'  target='parent'>Data link</a>"
 
       }
       layers.push(grouplayer);
@@ -82,28 +76,28 @@ function AddLayers(urls, map, layers){
       })
       lidar.data = []
     }
-    var url = urls[0]
-      var mapid = url.mapid
-      var token = url.token
-      let mapUrl = getTileUrl(mapid, token);
-      let layer = {
-        id: mapid,
-        name: "lidar",
+    var mapid = url.mapid
+    var token = url.token
+    let mapUrl = getTileUrl(mapid, token);
+    let layer = {
+      id: mapid,
+      name: "lidar",
+      type: "raster",
+      active: true,
+      layout: {
+        visibility: "visible"
+      },
+      source: {
         type: "raster",
-        active: true,
-        layout: {
-          visibility: "visible"
-        },
-        source: {
-          type: "raster",
-          tiles: [mapUrl],
-          tileSize: 256
-        },
-        paint: {}
-      };
-      map.addLayer(layer)
-      grouplayer.data.push(layer)
-    // });
+        tiles: [mapUrl],
+        tileSize: 256
+      },
+      paint: {
+        "raster-opacity": 0.7
+      }
+    };
+    map.addLayer(layer)
+    grouplayer.data.push(layer)
 }
 
 function getTileUrl(mapId, token) {

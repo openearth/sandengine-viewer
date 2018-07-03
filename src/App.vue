@@ -4,9 +4,12 @@
   <v-navigation-drawer fixed app v-model="drawer">
     <v-toolbar flat>
       <v-flex xs2 offset-xs5>
-        <v-tooltip bottom>
-          <v-progress-circular slot="activator" v-if="layers.length < 7" indeterminate ></v-progress-circular>
-          <span>Loading layers</span>
+        <v-tooltip fixed bottom>
+          <v-progress-circular slot="activator" v-if="layers.length < 7" indeterminate >
+          </v-progress-circular>
+          <span>
+            Loading layers
+          </span>
         </v-tooltip>
       </v-flex>
       <v-list>
@@ -117,6 +120,11 @@
 
 .bk-root {
     z-index: 0;
+}
+
+.navigation-drawer {
+  height: 100% !important;
+  overflow-y: hidden !important;
 }
 
 </style>
